@@ -3,6 +3,9 @@
  * HTTP endpoints for external API access
  */
 
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 import { setGlobalOptions } from "firebase-functions";
 import { onRequest } from "firebase-functions/https";
 import * as logger from "firebase-functions/logger";
@@ -26,25 +29,25 @@ const corsMiddleware = (req: any, res: any, next: () => void): void => {
         'http://localhost:4200',
         'http://localhost:3000'
     ];
-    
+
     const origin = req.headers.origin;
     if (origin && allowedOrigins.includes(origin)) {
         res.set('Access-Control-Allow-Origin', origin);
     } else {
         res.set('Access-Control-Allow-Origin', '*');
     }
-    
+
     res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
     res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept, Origin, Referer, User-Agent, sec-ch-ua, sec-ch-ua-mobile, sec-ch-ua-platform');
     res.set('Access-Control-Allow-Credentials', 'true');
     res.set('Access-Control-Max-Age', '86400'); // 24 hours
-    
+
     // Handle preflight requests
     if (req.method === 'OPTIONS') {
         res.status(204).send('');
         return;
     }
-    
+
     next();
 };
 
@@ -64,7 +67,7 @@ export const health = onRequest((request, response): void => {
 // CORS test endpoint
 export const corsTest = onRequest((request, response): void => {
     corsMiddleware(request, response, () => {
-        logger.info("CORS test requested", { 
+        logger.info("CORS test requested", {
             origin: request.headers.origin,
             method: request.method,
             headers: request.headers
@@ -145,7 +148,7 @@ export const apiInfo = onRequest((request, response): void => {
 export const book = onRequest(async (request, response): Promise<void> => {
     corsMiddleware(request, response, async () => {
         logger.info("Booking request received", { structuredData: true });
-        
+
         if (request.method !== 'POST') {
             response.status(405).json({
                 success: false,
@@ -156,21 +159,21 @@ export const book = onRequest(async (request, response): Promise<void> => {
         }
 
         try {
-            const { 
-                customer_name, 
-                customer_email, 
-                customer_phone, 
-                address, 
-                service_type, 
-                cleaners, 
-                hours, 
-                materials, 
-                total, 
-                payment_method, 
-                scheduled_date, 
-                scheduled_time 
+            const {
+                customer_name,
+                customer_email,
+                customer_phone,
+                address,
+                service_type,
+                cleaners,
+                hours,
+                materials,
+                total,
+                payment_method,
+                scheduled_date,
+                scheduled_time
             } = request.body;
-            
+
             // Validate required fields
             if (!customer_name || !customer_email || !service_type || !scheduled_date) {
                 response.status(400).json({
@@ -219,7 +222,7 @@ export const book = onRequest(async (request, response): Promise<void> => {
             if (isPaid) {
                 // Create payment through SkipCash
                 logger.info("Creating payment for paid booking", { orderId, total });
-                
+
                 const paymentData: PaymentData = {
                     order_id: orderId,
                     amount: total,
@@ -239,21 +242,21 @@ export const book = onRequest(async (request, response): Promise<void> => {
                 const paymentResult = await skipCashService.createPayment(paymentData);
 
                 if (paymentResult.success) {
-                    logger.info("SkipCash payment created successfully", { 
-                        orderId, 
-                        paymentUrl: paymentResult.paymentUrl 
+                    logger.info("SkipCash payment created successfully", {
+                        orderId,
+                        paymentUrl: paymentResult.paymentUrl
                     });
 
                     // Extract payment URL from SkipCash response
                     const paymentUrl = paymentResult.data?.resultObj?.payUrl || paymentResult.paymentUrl;
-                    
+
                     logger.info("Extracted payment URL", {
                         orderId,
                         extractedPaymentUrl: paymentUrl,
                         fromPayUrl: paymentResult.data?.resultObj?.payUrl,
                         fromPaymentUrl: paymentResult.paymentUrl
                     });
-                    
+
                     if (!paymentUrl) {
                         logger.error("Payment URL not found in SkipCash response", {
                             orderId,
@@ -283,9 +286,9 @@ export const book = onRequest(async (request, response): Promise<void> => {
                         });
                     return;
                 } else {
-                    logger.error("Failed to create SkipCash payment", { 
-                        orderId, 
-                        error: paymentResult.error 
+                    logger.error("Failed to create SkipCash payment", {
+                        orderId,
+                        error: paymentResult.error
                     });
 
                     response.status(500).json({
@@ -298,7 +301,7 @@ export const book = onRequest(async (request, response): Promise<void> => {
             } else {
                 // Direct booking without payment - submit to Google Form
                 logger.info("Creating unpaid booking", { orderId });
-                
+
                 const googleFormBookingData: BookingData = {
                     orderId,
                     isPaid: false,
@@ -315,12 +318,12 @@ export const book = onRequest(async (request, response): Promise<void> => {
 
                 try {
                     await googleFormService.submitBooking(googleFormBookingData);
-                    
+
                     logger.info("Unpaid booking submitted to Google Form successfully", { orderId });
-                    
+
                     // Update database status to confirmed
                     await databaseService.updateBookingStatus(orderId, 'confirmed');
-                    
+
                     response.status(201).json({
                         success: true,
                         message: "Booking created successfully (unpaid)",
@@ -331,8 +334,8 @@ export const book = onRequest(async (request, response): Promise<void> => {
                         }
                     });
                 } catch (googleFormError) {
-                    logger.error("Failed to submit booking to Google Form", { 
-                        orderId, 
+                    logger.error("Failed to submit booking to Google Form", {
+                        orderId,
                         error: googleFormError instanceof Error ? googleFormError.message : 'Unknown error'
                     });
 
@@ -343,7 +346,7 @@ export const book = onRequest(async (request, response): Promise<void> => {
                     });
                 }
             }
-            
+
         } catch (error) {
             logger.error("Error creating booking", error);
             response.status(500).json({
@@ -358,7 +361,7 @@ export const book = onRequest(async (request, response): Promise<void> => {
 export const checkPayment = onRequest(async (request, response): Promise<void> => {
     corsMiddleware(request, response, async () => {
         logger.info("Check payment request received", { structuredData: true });
-        
+
         if (request.method !== 'POST') {
             response.status(405).json({
                 success: false,
@@ -428,7 +431,7 @@ export const checkPayment = onRequest(async (request, response): Promise<void> =
             // Submit to Google Form
             try {
                 await googleFormService.submitBooking(googleFormBookingData);
-                
+
                 logger.info("Booking completed and submitted to Google Form successfully", {
                     orderId,
                     paymentId,
@@ -478,7 +481,7 @@ export const checkPayment = onRequest(async (request, response): Promise<void> =
 export const bookingSuccess = onRequest(async (request, response): Promise<void> => {
     corsMiddleware(request, response, async () => {
         logger.info("Booking success callback received", { structuredData: true });
-        
+
         if (request.method !== 'GET') {
             response.status(405).json({
                 success: false,
@@ -489,15 +492,15 @@ export const bookingSuccess = onRequest(async (request, response): Promise<void>
         }
 
         try {
-            const { 
-                orderId, 
-                status, 
-                paymentId, 
-                transactionId, 
-                amount, 
-                currency 
+            const {
+                orderId,
+                status,
+                paymentId,
+                transactionId,
+                amount,
+                currency
             } = request.query;
-            
+
             logger.info("SkipCash return URL parameters received", {
                 orderId,
                 status,
@@ -506,7 +509,7 @@ export const bookingSuccess = onRequest(async (request, response): Promise<void>
                 amount,
                 currency
             });
-            
+
             if (!orderId) {
                 response.status(400).json({
                     success: false,
@@ -518,12 +521,12 @@ export const bookingSuccess = onRequest(async (request, response): Promise<void>
             // Verify payment status from SkipCash using the service
             const skipCashService = new SkipCashService();
             const paymentVerification = skipCashService.verifyReturnUrlPaymentStatus(request.query);
-            
+
             if (!paymentVerification.isValid) {
-                logger.warn("Invalid payment status from SkipCash", { 
-                    orderId, 
-                    status, 
-                    error: paymentVerification.error 
+                logger.warn("Invalid payment status from SkipCash", {
+                    orderId,
+                    status,
+                    error: paymentVerification.error
                 });
                 response.status(400).json({
                     success: false,
@@ -535,9 +538,9 @@ export const bookingSuccess = onRequest(async (request, response): Promise<void>
 
             // Verify payment status indicates success
             if (paymentVerification.status !== 'success' && paymentVerification.status !== 'paid') {
-                logger.warn("Payment status indicates failure", { 
-                    orderId, 
-                    status: paymentVerification.status 
+                logger.warn("Payment status indicates failure", {
+                    orderId,
+                    status: paymentVerification.status
                 });
                 response.status(400).json({
                     success: false,
@@ -547,13 +550,13 @@ export const bookingSuccess = onRequest(async (request, response): Promise<void>
                 return;
             }
 
-            logger.info("Processing successful payment for booking", { 
-                orderId: paymentVerification.orderId, 
-                status: paymentVerification.status, 
-                paymentId: paymentVerification.paymentId, 
-                transactionId: paymentVerification.transactionId, 
-                amount: paymentVerification.amount, 
-                currency: paymentVerification.currency 
+            logger.info("Processing successful payment for booking", {
+                orderId: paymentVerification.orderId,
+                status: paymentVerification.status,
+                paymentId: paymentVerification.paymentId,
+                transactionId: paymentVerification.transactionId,
+                amount: paymentVerification.amount,
+                currency: paymentVerification.currency
             });
 
             // Initialize services
@@ -572,9 +575,9 @@ export const bookingSuccess = onRequest(async (request, response): Promise<void>
 
             // Update payment information in database
             await databaseService.updatePaymentInfo(
-                orderId as string, 
-                paymentVerification.paymentId || '', 
-                paymentVerification.transactionId || '', 
+                orderId as string,
+                paymentVerification.paymentId || '',
+                paymentVerification.transactionId || '',
                 true
             );
 
@@ -596,9 +599,9 @@ export const bookingSuccess = onRequest(async (request, response): Promise<void>
 
             try {
                 await googleFormService.submitBooking(googleFormBookingData);
-                
+
                 logger.info("Paid booking submitted to Google Form successfully", { orderId });
-                
+
                 response.status(200).json({
                     success: true,
                     message: "Payment successful and booking created",
@@ -608,8 +611,8 @@ export const bookingSuccess = onRequest(async (request, response): Promise<void>
                     }
                 });
             } catch (googleFormError) {
-                logger.error("Failed to submit paid booking to Google Form", { 
-                    orderId, 
+                logger.error("Failed to submit paid booking to Google Form", {
+                    orderId,
                     error: googleFormError instanceof Error ? googleFormError.message : 'Unknown error'
                 });
 
@@ -619,7 +622,7 @@ export const bookingSuccess = onRequest(async (request, response): Promise<void>
                     details: "Google Form submission failed"
                 });
             }
-            
+
         } catch (error) {
             logger.error("Error processing booking success", error);
             response.status(500).json({
@@ -634,7 +637,7 @@ export const bookingSuccess = onRequest(async (request, response): Promise<void>
 export const bookingCancel = onRequest(async (request, response): Promise<void> => {
     corsMiddleware(request, response, async () => {
         logger.info("Booking cancel callback received", { structuredData: true });
-        
+
         if (request.method !== 'GET') {
             response.status(405).json({
                 success: false,
@@ -645,15 +648,15 @@ export const bookingCancel = onRequest(async (request, response): Promise<void> 
         }
 
         try {
-            const { 
-                orderId, 
-                status, 
-                paymentId, 
-                transactionId, 
-                amount, 
-                currency 
+            const {
+                orderId,
+                status,
+                paymentId,
+                transactionId,
+                amount,
+                currency
             } = request.query;
-            
+
             logger.info("SkipCash cancel URL parameters received", {
                 orderId,
                 status,
@@ -662,7 +665,7 @@ export const bookingCancel = onRequest(async (request, response): Promise<void> 
                 amount,
                 currency
             });
-            
+
             if (!orderId) {
                 response.status(400).json({
                     success: false,
@@ -674,32 +677,32 @@ export const bookingCancel = onRequest(async (request, response): Promise<void> 
             // Verify payment status from SkipCash using the service
             const skipCashService = new SkipCashService();
             const paymentVerification = skipCashService.verifyReturnUrlPaymentStatus(request.query);
-            
+
             if (!paymentVerification.isValid) {
-                logger.warn("Invalid payment status from SkipCash", { 
-                    orderId, 
-                    status, 
-                    error: paymentVerification.error 
+                logger.warn("Invalid payment status from SkipCash", {
+                    orderId,
+                    status,
+                    error: paymentVerification.error
                 });
                 // Don't fail here - user might have manually cancelled
             }
 
             // Verify cancellation status from SkipCash
             if (paymentVerification.status !== 'cancelled' && paymentVerification.status !== 'canceled') {
-                logger.warn("Payment status indicates success, not cancellation", { 
-                    orderId, 
-                    status: paymentVerification.status 
+                logger.warn("Payment status indicates success, not cancellation", {
+                    orderId,
+                    status: paymentVerification.status
                 });
                 // Don't fail here - user might have manually cancelled
             }
 
-            logger.info("Processing cancelled payment for booking", { 
-                orderId: paymentVerification.orderId, 
-                status: paymentVerification.status, 
-                paymentId: paymentVerification.paymentId, 
-                transactionId: paymentVerification.transactionId, 
-                amount: paymentVerification.amount, 
-                currency: paymentVerification.currency 
+            logger.info("Processing cancelled payment for booking", {
+                orderId: paymentVerification.orderId,
+                status: paymentVerification.status,
+                paymentId: paymentVerification.paymentId,
+                transactionId: paymentVerification.transactionId,
+                amount: paymentVerification.amount,
+                currency: paymentVerification.currency
             });
 
             // Initialize services
@@ -719,9 +722,9 @@ export const bookingCancel = onRequest(async (request, response): Promise<void> 
             // Update payment information in database (marked as unpaid)
             if (paymentVerification.paymentId && paymentVerification.transactionId) {
                 await databaseService.updatePaymentInfo(
-                    orderId as string, 
-                    paymentVerification.paymentId, 
-                    paymentVerification.transactionId, 
+                    orderId as string,
+                    paymentVerification.paymentId,
+                    paymentVerification.transactionId,
                     false
                 );
             }
@@ -744,9 +747,9 @@ export const bookingCancel = onRequest(async (request, response): Promise<void> 
 
             try {
                 await googleFormService.submitBooking(googleFormBookingData);
-                
+
                 logger.info("Cancelled booking submitted to Google Form successfully", { orderId });
-                
+
                 response.status(200).json({
                     success: true,
                     message: "Payment cancelled and booking created as unpaid",
@@ -756,8 +759,8 @@ export const bookingCancel = onRequest(async (request, response): Promise<void> 
                     }
                 });
             } catch (googleFormError) {
-                logger.error("Failed to submit cancelled booking to Google Form", { 
-                    orderId, 
+                logger.error("Failed to submit cancelled booking to Google Form", {
+                    orderId,
                     error: googleFormError instanceof Error ? googleFormError.message : 'Unknown error'
                 });
 
@@ -767,7 +770,7 @@ export const bookingCancel = onRequest(async (request, response): Promise<void> 
                     details: "Google Form submission failed"
                 });
             }
-            
+
         } catch (error) {
             logger.error("Error processing booking cancel", error);
             response.status(500).json({
@@ -782,7 +785,7 @@ export const bookingCancel = onRequest(async (request, response): Promise<void> 
 export const skipCashWebhook = onRequest(async (request, response): Promise<void> => {
     corsMiddleware(request, response, async () => {
         logger.info("SkipCash webhook received", { structuredData: true });
-        
+
         if (request.method !== 'POST') {
             response.status(405).json({
                 success: false,
@@ -795,7 +798,7 @@ export const skipCashWebhook = onRequest(async (request, response): Promise<void
         try {
             const webhookData = request.body;
             const authHeader = request.headers.authorization;
-            
+
             logger.info("Processing SkipCash webhook", { webhookData, authHeader });
 
             // Initialize services
@@ -804,7 +807,7 @@ export const skipCashWebhook = onRequest(async (request, response): Promise<void
 
             // Verify webhook signature
             const isValidSignature = skipCashService.verifyWebhookSignature(webhookData, authHeader || '');
-            
+
             if (!isValidSignature) {
                 logger.error("Invalid webhook signature", { webhookData, authHeader });
                 response.status(401).json({
@@ -824,10 +827,10 @@ export const skipCashWebhook = onRequest(async (request, response): Promise<void
 
             // Determine if payment is successful (StatusId 2 = paid)
             const isPaid = Number(StatusId) === 2;
-            
+
             // Convert Amount to number as GoogleFormService expects it
             const amountNumber = parseFloat(Amount) || 0;
-            
+
             logger.info("Payment status update", {
                 paymentId: PaymentId,
                 amount: Amount,
@@ -846,7 +849,7 @@ export const skipCashWebhook = onRequest(async (request, response): Promise<void
                     StatusId,
                     amountNumber
                 );
-                
+
                 logger.info("Google Form updated successfully for payment", {
                     transactionId: TransactionId,
                     paymentId: PaymentId,
@@ -879,7 +882,7 @@ export const skipCashWebhook = onRequest(async (request, response): Promise<void
                     details: "Google Form submission failed"
                 });
             }
-            
+
         } catch (error) {
             logger.error("Error processing SkipCash webhook", error);
             response.status(500).json({
@@ -894,7 +897,7 @@ export const skipCashWebhook = onRequest(async (request, response): Promise<void
 export const saveBooking = onRequest(async (request, response): Promise<void> => {
     // Apply CORS headers and handle preflight requests
     corsMiddleware(request, response, async () => {
-        
+
         if (request.method !== 'POST') {
             response.status(405).json({
                 success: false,
@@ -937,7 +940,7 @@ export const saveBooking = onRequest(async (request, response): Promise<void> =>
             if (transactionId) {
                 // UPDATE: Update existing booking with payment info
                 await databaseService.updatePaymentInfo(orderId, transactionId, transactionId, isPaid);
-                
+
                 // Get the existing booking to ensure we have the most accurate data for Google Form
                 const existingBooking = await databaseService.getBookingByOrderId(orderId);
                 if (existingBooking) {
@@ -994,7 +997,7 @@ export const saveBooking = onRequest(async (request, response): Promise<void> =>
             // Submit to Google Form
             try {
                 const success = await googleFormService.submitBooking(googleFormBookingData);
-                
+
                 if (success) {
                     logger.info("Booking info saved to Google Form successfully", {
                         orderId,
