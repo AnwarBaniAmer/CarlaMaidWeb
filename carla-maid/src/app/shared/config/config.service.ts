@@ -3,13 +3,18 @@ import { environment } from '../../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Direction, Languages } from '../interfaces/languages';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConfigService {
 
-  constructor(private translate: TranslateService, @Inject(PLATFORM_ID) private platformId: Object) { }
+  constructor(
+    private translate: TranslateService, 
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private router: Router
+  ) { }
 
   /**
    * Determines the current language setting from local storage or falls back to the default language.
@@ -41,8 +46,16 @@ export class ConfigService {
   }
 
   toggleLang(){
-    this.setLang(this.getLang() === 'ar'? 'en' : 'ar'); 
-    location.reload();
+    const newLang = this.getLang() === 'ar' ? 'en' : 'ar';
+    this.setLang(newLang);
+    
+    // Get current route and navigate to force refresh without full page reload
+    const currentUrl = this.router.url;
+    
+    // Navigate away and back to refresh the component
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigateByUrl(currentUrl);
+    });
   }
 
   /**

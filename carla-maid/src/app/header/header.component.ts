@@ -7,6 +7,20 @@ import { Direction, Languages } from '../shared/interfaces/languages';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 
+interface ServiceItem {
+  label: string;
+  translationKey: string;
+  slug: string;
+}
+
+interface NavItem {
+  label: string;
+  icon: string;
+  link: string;
+  hasDropdown?: boolean;
+  services?: ServiceItem[];
+}
+
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -21,9 +35,26 @@ import { Subscription } from 'rxjs';
 })
 
 export class HeaderComponent implements OnInit, OnDestroy {
-  items: any[] = [];
+  items: NavItem[] = [];
   private langChangeSubscription?: Subscription;
   isMobileMenuOpen = false;
+  isServicesDropdownOpen = false;
+  
+  // Services list matching the our-services page with individual page links
+  services: ServiceItem[] = [
+    { label: '', translationKey: 'shared.OfficeCleaningServices', slug: 'office-cleaning' },
+    { label: '', translationKey: 'shared.HospitalityStaffinQatar', slug: 'hospitality-staff' },
+    { label: '', translationKey: 'shared.DeepCleaningServices', slug: 'deep-cleaning' },
+    { label: '', translationKey: 'shared.HomeCleaninginQatar', slug: 'home-cleaning' },
+    { label: '', translationKey: 'shared.MaidServices', slug: 'maid-services' },
+    { label: '', translationKey: 'shared.EventCleaning', slug: 'event-cleaning' },
+    { label: '', translationKey: 'shared.EcoFriendlyCleaning', slug: 'eco-friendly-cleaning' },
+    { label: '', translationKey: 'shared.HousekeepingServices', slug: 'housekeeping' },
+    { label: '', translationKey: 'shared.CarpetCleaning', slug: 'carpet-cleaning' },
+    { label: '', translationKey: 'shared.StaffingForBusinesses', slug: 'staffing-businesses' },
+    { label: '', translationKey: 'shared.CustomizedCleaning', slug: 'customized-cleaning' },
+    { label: '', translationKey: 'shared.SeasonalCleaningServices', slug: 'seasonal-cleaning' }
+  ];
 
   constructor(private translate: TranslateService, private configService: ConfigService, private router: Router) {}
   
@@ -73,6 +104,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   private updateNavigationItems(): void {
+    // Update service labels with translations
+    this.services = this.services.map(service => ({
+      ...service,
+      label: this.translate.instant(service.translationKey)
+    }));
+
     this.items = [
       {
         label: this.translate.instant('header.home'),
@@ -82,7 +119,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
       {
         label: this.translate.instant('header.ourServices'),
         icon: 'pi pi-star',
-        link: '/our-services'
+        link: '/our-services',
+        hasDropdown: true,
+        services: this.services
       },
       {
         label: this.translate.instant('shared.aboutUs'),
@@ -102,6 +141,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
     ];
     
     console.log('Navigation items updated:', this.items);
+  }
+
+  openServicesDropdown(): void {
+    this.isServicesDropdownOpen = true;
+  }
+
+  closeServicesDropdown(): void {
+    this.isServicesDropdownOpen = false;
+  }
+
+  toggleServicesDropdown(): void {
+    this.isServicesDropdownOpen = !this.isServicesDropdownOpen;
   }
 
   // Test method to manually navigate

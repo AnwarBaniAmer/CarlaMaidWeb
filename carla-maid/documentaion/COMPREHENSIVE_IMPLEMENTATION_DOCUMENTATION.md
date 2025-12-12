@@ -76,20 +76,21 @@ GET  /api/skipcash/health                 // SkipCash API health check
 
 #### Payment Configuration
 ```javascript
+// ⚠️ SECURITY: Never hardcode credentials. Use environment variables instead.
 const skipCashConfig = {
   production: {
     apiUrl: 'https://api.skipcash.app',
-    clientId: '7242ee4f-ca43-44bb-804c-4f0c621bb54d',
-    apiKey: '2ce8c700-f8e6-4cc5-b59a-0069f368815d',
-    secretKey: '[ENCRYPTED_SECRET_KEY]',
-    webhookKey: '43ef9131-140e-4871-8586-94b8f69f32b2'
+    clientId: process.env.SKIPCASH_PRODUCTION_CLIENT_ID || 'YOUR_PRODUCTION_CLIENT_ID',
+    apiKey: process.env.SKIPCASH_PRODUCTION_API_KEY || 'YOUR_PRODUCTION_API_KEY',
+    secretKey: process.env.SKIPCASH_PRODUCTION_SECRET_KEY || 'YOUR_PRODUCTION_SECRET_KEY',
+    webhookKey: process.env.SKIPCASH_PRODUCTION_WEBHOOK_KEY || 'YOUR_PRODUCTION_WEBHOOK_KEY'
   },
   sandbox: {
     apiUrl: 'https://skipcashtest.azurewebsites.net',
-    clientId: '3d8fecfa-f2c0-4fc8-a913-91634b306eec',
-    apiKey: '288d604d-03b6-4c66-821e-0a82a3fd2cc8',
-    secretKey: '[ENCRYPTED_SANDBOX_SECRET_KEY]',
-    webhookKey: 'YOUR_SANDBOX_WEBHOOK_KEY'
+    clientId: process.env.SKIPCASH_SANDBOX_CLIENT_ID || 'YOUR_SANDBOX_CLIENT_ID',
+    apiKey: process.env.SKIPCASH_SANDBOX_API_KEY || 'YOUR_SANDBOX_API_KEY',
+    secretKey: process.env.SKIPCASH_SANDBOX_SECRET_KEY || 'YOUR_SANDBOX_SECRET_KEY',
+    webhookKey: process.env.SKIPCASH_SANDBOX_WEBHOOK_KEY || 'YOUR_SANDBOX_WEBHOOK_KEY'
   }
 };
 ```
@@ -594,10 +595,16 @@ PORT=4000
 GOOGLE_FORM_URL=https://docs.google.com/forms/u/0/d/e/1FAIpQLSeouZn9dc038aSnDj40SGjGz2uWEbPqV17SAvUHqaW4483yew/formResponse
 
 # SkipCash Configuration
-SKIPCASH_CLIENT_ID=7242ee4f-ca43-44bb-804c-4f0c621bb54d
-SKIPCASH_API_KEY=2ce8c700-f8e6-4cc5-b59a-0069f368815d
-SKIPCASH_SECRET_KEY=[ENCRYPTED_SECRET_KEY]
-SKIPCASH_WEBHOOK_KEY=43ef9131-140e-4871-8586-94b8f69f32b2
+# ⚠️ SECURITY: Replace with your actual credentials from SkipCash Merchant Portal
+# Never commit actual credentials to version control
+SKIPCASH_PRODUCTION_CLIENT_ID=YOUR_PRODUCTION_CLIENT_ID
+SKIPCASH_PRODUCTION_API_KEY=YOUR_PRODUCTION_API_KEY
+SKIPCASH_PRODUCTION_SECRET_KEY=YOUR_PRODUCTION_SECRET_KEY
+SKIPCASH_PRODUCTION_WEBHOOK_KEY=YOUR_PRODUCTION_WEBHOOK_KEY
+SKIPCASH_SANDBOX_CLIENT_ID=YOUR_SANDBOX_CLIENT_ID
+SKIPCASH_SANDBOX_API_KEY=YOUR_SANDBOX_API_KEY
+SKIPCASH_SANDBOX_SECRET_KEY=YOUR_SANDBOX_SECRET_KEY
+SKIPCASH_SANDBOX_WEBHOOK_KEY=YOUR_SANDBOX_WEBHOOK_KEY
 ```
 
 ### 3. Deployment Scripts
