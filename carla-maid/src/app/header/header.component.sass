@@ -28,6 +28,26 @@ header
             
         .logo
             flex-shrink: 0
+            display: inline-block
+            text-decoration: none
+            cursor: pointer
+            transition: transform 0.3s ease
+            background: transparent
+            border: none
+            padding: 0
+            margin: 0
+            position: relative
+            z-index: 1
+            
+            &:hover
+                transform: scale(1.05)
+                transform-origin: center left
+            
+            img
+                display: block
+                background: transparent
+                background-color: transparent
+                mix-blend-mode: normal
             
         .mobile-menu-toggle
             display: none
@@ -250,39 +270,48 @@ header
         .nav-end
             display: flex
             align-items: center
-            gap: 20px
+            gap: 15px
             
-            .contact-link
-                display: block
-                padding: 10px 20px
-                border-radius: 8px
+            .book-now-button
+                display: inline-block
+                padding: 12px 28px
+                background: linear-gradient(135deg, #0188FF 0%, #0346FF 100%)
+                color: #ffffff
                 text-decoration: none
-                color: #333
-                font-weight: 500
+                border-radius: 8px
+                font-weight: 600
+                font-size: 15px
                 position: relative
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1)
                 overflow: hidden
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1)
+                box-shadow: 0 4px 15px rgba(1, 136, 255, 0.3)
+                border: 2px solid transparent
+                white-space: nowrap
                 
-                &::after
+                &::before
                     content: ''
                     position: absolute
-                    top: 50%
-                    left: 50%
-                    width: 0
-                    height: 0
-                    background: radial-gradient(circle, rgba(1, 136, 255, 0.1) 0%, transparent 70%)
-                    transform: translate(-50%, -50%)
-                    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1)
-                    border-radius: 50%
-                    z-index: -1
+                    top: 0
+                    left: -100%
+                    width: 100%
+                    height: 100%
+                    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)
+                    transition: left 0.5s ease
                 
                 &:hover
-                    color: #0188FF
-                    transform: translateY(-2px)
+                    transform: translateY(-3px) scale(1.05)
+                    box-shadow: 0 6px 20px rgba(1, 136, 255, 0.4)
+                    background: linear-gradient(135deg, #0278e8 0%, #023de8 100%)
                     
-                    &::after
-                        width: 120%
-                        height: 120%
+                    &::before
+                        left: 100%
+                
+                &:active
+                    transform: translateY(-1px) scale(1.02)
+                
+                &.active
+                    background: linear-gradient(135deg, #0278e8 0%, #023de8 100%)
+                    box-shadow: 0 4px 15px rgba(1, 136, 255, 0.5)
                 
     h4
         font-size: 16px
@@ -380,27 +409,41 @@ header.ar
                 left: 0
                 right: 0
                 bottom: 0
-                background-color: rgba(0, 0, 0, 0.9)
+                width: 100vw
+                height: 100vh
+                min-height: 100vh
+                background-color: rgba(0, 0, 0, 0.95)
                 flex-direction: column
-                justify-content: center
+                justify-content: flex-start
                 align-items: center
-                gap: 30px
+                gap: 20px
+                padding: 80px 20px 40px 20px
+                overflow-y: auto
+                -webkit-overflow-scrolling: touch
                 transform: translateX(-100%)
                 transition: transform 0.3s ease-in-out
                 z-index: 999
+                box-sizing: border-box
                 
                 &.mobile-open
                     transform: translateX(0)
                     
                 .mobile-close-btn
                     display: block
-                    opacity: 0
+                    position: absolute
+                    top: 20px
+                    right: 20px
+                    opacity: 1
                     animation: fadeIn 0.3s ease-in-out 0.2s forwards
                     
                 .nav-item
-                    opacity: 0
+                    opacity: 1
+                    width: 100%
+                    max-width: 300px
                     animation: slideInUp 0.4s ease-in-out 0.3s forwards
                     
+                    &:nth-child(1)
+                        animation-delay: 0.3s
                     &:nth-child(2)
                         animation-delay: 0.4s
                     &:nth-child(3)
@@ -411,12 +454,19 @@ header.ar
                         animation-delay: 0.7s
                     &:nth-child(6)
                         animation-delay: 0.8s
+                    &:nth-child(7)
+                        animation-delay: 0.9s
                     
                 .nav-item
                     .nav-link
                         color: white
                         font-size: 18px
                         padding: 15px 20px
+                        width: 100%
+                        display: flex
+                        align-items: center
+                        justify-content: center
+                        text-align: center
                         
                         span
                             margin-left: 12px
@@ -490,11 +540,41 @@ header.ar
                                         color: white
                             
             .nav-end
-                .contact-link
-                    display: none
+                flex-direction: column
+                gap: 15px
+                width: 100%
+                padding: 20px
+                
+                .book-now-button
+                    width: auto
+                    max-width: 200px
+                    text-align: center
+                    padding: 10px 20px
+                    font-size: 14px
+                    align-self: center
                     
                 .translation-button
                     font-size: 14px
+                    color: #999999 !important
+                    
+                    &:hover
+                        color: #0188FF !important
+                    
+                    span
+                        color: #999999 !important
+                    
+                    svg
+                        stroke: #999999 !important
+                        
+                        path
+                            stroke: #999999 !important
+                    
+                    &:hover
+                        svg
+                            stroke: #0188FF !important
+                            
+                            path
+                                stroke: #0188FF !important
                     
         img
             width: 100px

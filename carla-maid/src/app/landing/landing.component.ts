@@ -113,62 +113,68 @@ export class LandingComponent implements OnInit {
       {
         image: '../../assets/images/our-services/our-services-1.png',
         title: this._translate.instant('services.hospitalityStaffTitle'),
-        description: this._translate.instant('services.hospitalityStaffDescription')
+        description: this._translate.instant('services.hospitalityStaffDescription'),
+        slug: 'hospitality-staff'
       },
       {
         image: '../../assets/images/our-services/our-services-2.png',
         title: this._translate.instant('services.officeCleaningTitle'),
-        description: this._translate.instant('services.officeCleaningDescription')
+        description: this._translate.instant('services.officeCleaningDescription'),
+        slug: 'office-cleaning'
       },
       {
         image: '../../assets/images/our-services/our-services-3.png',
         title: this._translate.instant('services.homeCleaningTitle'),
-        description: this._translate.instant('services.homeCleaningDescription')
+        description: this._translate.instant('services.homeCleaningDescription'),
+        slug: 'home-cleaning'
       },
       {
         image: '../../assets/images/our-services/our-services-4.png',
         title: this._translate.instant('services.maidServicesTitle'),
-        description: this._translate.instant('services.maidServicesDescription')
+        description: this._translate.instant('services.maidServicesDescription'),
+        slug: 'maid-services'
       },
       {
         image: '../../assets/images/our-services/our-services-5.png',
         title: this._translate.instant('services.eventCleaningTitle'),
-        description: this._translate.instant('services.eventCleaningDescription')
+        description: this._translate.instant('services.eventCleaningDescription'),
+        slug: 'event-cleaning'
       },
       {
         image: '../../assets/images/our-services/our-services-6.png',
         title: this._translate.instant('services.deepCleaningTitle'),
-        description: this._translate.instant('services.deepCleaningDescription')
+        description: this._translate.instant('services.deepCleaningDescription'),
+        slug: 'deep-cleaning'
       },
       {
         image: '../../assets/images/our-services/our-services-7.png',
         title: this._translate.instant('services.ecoFriendlyCleaningTitle'),
-        description: this._translate.instant('services.ecoFriendlyCleaningDescription')
+        description: this._translate.instant('services.ecoFriendlyCleaningDescription'),
+        slug: 'eco-friendly-cleaning'
       },
       {
         image: '../../assets/images/our-services/our-services-8.png',
         title: this._translate.instant('services.housekeepingTitle'),
-        description: this._translate.instant('services.housekeepingDescription')
-      },
-      {
-        image: '../../assets/images/our-services/our-services-9.png',
-        title: this._translate.instant('services.carpetCleaningTitle'),
-        description: this._translate.instant('services.carpetCleaningDescription')
+        description: this._translate.instant('services.housekeepingDescription'),
+        slug: 'housekeeping'
       },
       {
         image: '../../assets/images/our-services/our-services-10.png',
         title: this._translate.instant('services.staffingBusinessesTitle'),
-        description: this._translate.instant('services.staffingBusinessesDescription')
+        description: this._translate.instant('services.staffingBusinessesDescription'),
+        slug: 'staffing-businesses'
       },
       {
         image: '../../assets/images/our-services/our-services-11.png',
         title: this._translate.instant('services.customizedCleaningTitle'),
-        description: this._translate.instant('services.customizedCleaningDescription')
+        description: this._translate.instant('services.customizedCleaningDescription'),
+        slug: 'customized-cleaning'
       },
       {
         image: '../../assets/images/our-services/our-services-12.png',
         title: this._translate.instant('services.seasonalCleaningTitle'),
-        description: this._translate.instant('services.seasonalCleaningDescription')
+        description: this._translate.instant('services.seasonalCleaningDescription'),
+        slug: 'seasonal-cleaning'
       }
     ];
 

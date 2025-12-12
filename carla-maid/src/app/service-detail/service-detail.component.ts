@@ -201,26 +201,6 @@ export class ServiceDetailComponent implements OnInit, OnDestroy {
       includedKeys: ['serviceDetail.housekeeping.included1', 'serviceDetail.housekeeping.included2', 'serviceDetail.housekeeping.included3', 'serviceDetail.housekeeping.included4', 'serviceDetail.housekeeping.included5']
     },
     {
-      id: 'carpet-cleaning',
-      slug: 'carpet-cleaning',
-      titleKey: 'serviceDetail.carpetCleaning.title',
-      subtitleKey: 'serviceDetail.carpetCleaning.subtitle',
-      descriptionKey: 'serviceDetail.carpetCleaning.description',
-      heroImage: 'assets/images/our-services/our-services-9.png',
-      heroBackground: 'https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=1920&q=80',
-      icon: '🧶',
-      color: '#14B8A6',
-      gradient: 'linear-gradient(135deg, #14B8A6 0%, #0D9488 100%)',
-      features: [
-        { icon: '💨', titleKey: 'serviceDetail.carpetCleaning.feature1.title', descriptionKey: 'serviceDetail.carpetCleaning.feature1.desc' },
-        { icon: '🦠', titleKey: 'serviceDetail.carpetCleaning.feature2.title', descriptionKey: 'serviceDetail.carpetCleaning.feature2.desc' },
-        { icon: '✨', titleKey: 'serviceDetail.carpetCleaning.feature3.title', descriptionKey: 'serviceDetail.carpetCleaning.feature3.desc' },
-        { icon: '🔧', titleKey: 'serviceDetail.carpetCleaning.feature4.title', descriptionKey: 'serviceDetail.carpetCleaning.feature4.desc' }
-      ],
-      benefitsKeys: ['serviceDetail.carpetCleaning.benefit1', 'serviceDetail.carpetCleaning.benefit2', 'serviceDetail.carpetCleaning.benefit3', 'serviceDetail.carpetCleaning.benefit4'],
-      includedKeys: ['serviceDetail.carpetCleaning.included1', 'serviceDetail.carpetCleaning.included2', 'serviceDetail.carpetCleaning.included3', 'serviceDetail.carpetCleaning.included4', 'serviceDetail.carpetCleaning.included5']
-    },
-    {
       id: 'staffing-businesses',
       slug: 'staffing-businesses',
       titleKey: 'serviceDetail.staffingBusinesses.title',

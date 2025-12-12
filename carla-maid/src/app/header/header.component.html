@@ -1,13 +1,13 @@
 <header [ngClass]="{'ar': direction() == 'rtl'}">
   <nav class="nav">
     <div class="nav-container">
-      <div class="logo">
+      <a routerLink="/" class="logo">
         @if( getLang() == 'en'){
           <img src="../../assets/images/carla-en.png" alt="Carla Maid Qatar - Professional Cleaning Services Logo">
         }@else {
           <img src="../../assets/images/carla-ar.png" alt="كارلا ميد قطر - خدمات التنظيف الاحترافية شعار">
         }
-      </div>
+      </a>
       
       <!-- Mobile menu toggle -->
       <button class="mobile-menu-toggle" (click)="toggleMobileMenu()" [attr.aria-expanded]="isMobileMenuOpen">
@@ -81,9 +81,9 @@
       </ul>
       
       <div class="nav-end">
-        <a routerLink="/contact-us" 
+        <a routerLink="/book-now" 
            routerLinkActive="active"
-           class="clickable contact-link">{{'shared.contactUs' | translate}}</a>
+           class="book-now-button">{{'shared.bookNow' | translate}}</a>
         <button class="translation-button" (click)="switchLanguage()">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="Navigation / Globe">

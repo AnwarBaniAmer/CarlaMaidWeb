@@ -101,8 +101,10 @@
         "contactYouSoon": "Thank you! We will contact you as soon as possible.",
         "needsHelp": "Need Help?",
         "HaveQuestionsBeforeBooking": "Have Questions Before Booking?",
-        "bookNowDesc": "If you’d like more information about our services or need help with the booking process, feel free to reach out. We’re here to assist!",
-        "booking_confirmation_message": "Thanks for booking with us, our call center will call you as soon as possible to confirm the booking and the details"
+        "bookNowDesc": "If you'd like more information about our services or need help with the booking process, feel free to reach out. We're here to assist!",
+        "booking_confirmation_message": "Thanks for booking with us, our call center will call you as soon as possible to confirm the booking and the details",
+        "policy": "Policy",
+        "privacyPolicyTerms": "Privacy Policy & Terms of Service"
     },
     "paragraph": {
         "trustMaidService": "Your trusted maid service and cleaning company in Qatar. Carla Maid provides tailored cleaning services for homes and businesses, including eco-friendly options and deep cleaning for a spotless, stress-free environment in Doha and beyond.",
@@ -679,5 +681,65 @@
         "whatsNext": "What's Next?",
         "whatsNextDescription": "Our team will contact you within 24 hours to confirm your booking and finalize all the details. Please keep your phone available.",
         "orderOnlyMessage": "Your booking has been successfully created. We will contact you soon with more details."
+    },
+    "policy": {
+        "lastUpdated": "Last Updated",
+        "lastUpdatedDate": "January 2025",
+        "privacyPolicy": {
+            "title": "Privacy Policy",
+            "introduction": {
+                "title": "Introduction",
+                "content": "At Carla Maid, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you use our cleaning services in Qatar."
+            },
+            "dataCollection": {
+                "title": "Information We Collect",
+                "content": "We collect information that you provide directly to us when you:",
+                "item1": "Book our cleaning services through our website or phone",
+                "item2": "Contact us for inquiries or customer support",
+                "item3": "Subscribe to our newsletter or promotional materials",
+                "item4": "Interact with us on social media platforms"
+            },
+            "dataUsage": {
+                "title": "How We Use Your Information",
+                "content": "We use the information we collect to provide, maintain, and improve our services, process your bookings, communicate with you about your appointments, send you promotional materials (with your consent), and comply with legal obligations."
+            },
+            "dataProtection": {
+                "title": "Data Security",
+                "content": "We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the internet is 100% secure."
+            },
+            "yourRights": {
+                "title": "Your Rights",
+                "content": "You have the right to access, update, or delete your personal information at any time. You can also opt-out of receiving promotional communications from us by contacting us directly."
+            }
+        },
+        "termsOfService": {
+            "title": "Terms of Service",
+            "acceptance": {
+                "title": "Acceptance of Terms",
+                "content": "By booking our services or using our website, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services."
+            },
+            "services": {
+                "title": "Services Description",
+                "content": "Carla Maid provides professional cleaning and staffing services in Qatar. We reserve the right to modify, suspend, or discontinue any service at any time without prior notice."
+            },
+            "bookingCancellation": {
+                "title": "Booking and Cancellation",
+                "content": "Bookings can be made through our website or by phone. Cancellations must be made at least 24 hours in advance to avoid cancellation fees. Same-day cancellations may be subject to charges."
+            },
+            "payment": {
+                "title": "Payment Terms",
+                "content": "Payment is due upon completion of service unless otherwise agreed. We accept cash, credit cards, and other payment methods as specified. Prices are subject to change without notice."
+            },
+            "liability": {
+                "title": "Limitation of Liability",
+                "content": "While we take great care in providing our services, Carla Maid is not liable for any indirect, incidental, or consequential damages arising from the use of our services. Our liability is limited to the value of the service provided."
+            }
+        },
+        "contactUs": {
+            "title": "Contact Us",
+            "content": "If you have any questions about this Privacy Policy or our Terms of Service, please contact us:",
+            "email": "Email",
+            "phone": "Phone"
+        }
     }
 }

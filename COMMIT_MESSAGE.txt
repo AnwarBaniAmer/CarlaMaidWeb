@@ -1,63 +1,65 @@
-fix: Add .htaccess for SPA routing and complete SEO Phase 2-3 enhancements
+feat: Add policy page, enhance UI components, and improve navigation
+
+## ✨ New Features
+- Add policy page with privacy policy and terms of service
+  - Accessible from footer under "Our Values" section
+  - Styled button link for better visibility
+  - Background image with gradient overlay
+  - Enhanced UI with hover effects, gradient accents, and modern card design
+  - Bilingual support (English/Arabic)
+  - SEO optimized with proper meta tags
+
+## 🎨 UI/UX Enhancements
+
+### Header Improvements
+- Make "Book Now" button a prominent focal point
+  - Moved from navigation menu to header right section
+  - Gradient blue background with hover effects
+  - Button-style appearance for better visibility
+- Move "Contact Us" to navigation menu with other tabs
+- Make logo clickable - navigates to home page on click
+- Improve mobile menu
+  - Full screen height coverage (100vh)
+  - Scrollable menu for all navigation items
+  - Fixed language button text color (gray for visibility)
+  - Proper padding and spacing for all items
+
+### Landing Page Enhancements
+- Make service slider items clickable
+  - Added navigation to corresponding service detail pages
+  - Hover effects for better user feedback
+- Update Call Now button hover effect
+  - Green gradient hover (matching mobile version) for desktop
+  - WhatsApp green color scheme (#25d366)
+
+### Policy Page Design
+- Hero section with background image and gradient overlay
+- Enhanced card design with shadows, borders, and hover animations
+- Gradient text effects for headings
+- Checkmark icons and arrow bullets for better visual hierarchy
+- Responsive design for all screen sizes
+
+## 🗑️ Removals
+- Remove carpet cleaning service from all components
+  - Removed from header navigation dropdown
+  - Removed from landing page services slider
+  - Removed from our-services page
+  - Removed service detail page data
 
 ## 🐛 Bug Fixes
-- Add .htaccess file to fix 404 errors on page refresh
-  - Implements URL rewriting for Angular SPA routing
-  - Adds compression, caching, and security headers
-  - Fixes issue where refreshing routes like /our-services returns 404
+- Fix mobile menu visibility - all navigation items now visible
+- Fix mobile menu background - full screen height coverage
+- Fix logo background transparency on hover
+- Fix language button text color in mobile menu (white to gray)
 
-## 🔍 SEO Enhancements (Phase 2)
-- Implement breadcrumbs component with structured data
-  - Dynamic breadcrumb generation based on routes
-  - BreadcrumbList schema for better search visibility
-- Add FAQ schema to landing page
-  - FAQPage structured data with 8 common questions
-  - Integrated with existing translation keys
-- Optimize page titles and meta descriptions
-  - Enhanced titles with location keywords (Qatar/Doha)
-  - Improved meta descriptions with CTAs
-  - Updated contact-us page for quotation requests
-- Add alt text to all images
-  - Descriptive alt attributes for accessibility and SEO
-  - Location-specific keywords in alt text
+## 📝 Technical Changes
+- Add route for /policy page
+- Update footer component with policy link
+- Add translations for policy content (EN/AR)
+- Update service data structure with slug properties for navigation
+- Refactor navigation structure and styling
 
-## 🔗 SEO Enhancements (Phase 3)
-- Improve internal linking structure
-  - Add contextual links from blog posts to services
-  - Add internal links in landing and services pages
-  - Create CTA section in blog posts with service links
-- Optimize content with location keywords
-  - Natural integration of "Qatar" and "Doha" keywords
-  - Contextual internal links with location terms
-- Implement lazy loading for images
-  - Added loading="lazy" to all images
-  - Improved page load performance
-  - Better Core Web Vitals scores
-
-## 📝 Component Updates
-- Contact Us: Enhanced SEO for quotation requests
-  - Updated meta tags with quotation-focused keywords
-  - Added ContactPage structured data schema
-  - Improved analytics tracking
-- Landing: Added internal links with location keywords
-- Our Services: Added contextual internal links
-- View Blogs: Added CTA section with service links
-- All components: Added lazy loading to images
-
-## 🌐 Translation Updates
-- Added new translation keys for blog CTA section
-  - relatedServices, exploreOurServices, totalBlogs
-  - loadMore, loadingMore, retry
-- Updated English and Arabic translations
-
-## 📚 Documentation
-- Add SEO enhancement guide
-- Add 404 fix deployment guide
-
-## 🎯 Impact
-- Fixes critical 404 errors on page refresh
-- Improves SEO rankings with better structured data
-- Enhances user experience with better internal linking
-- Optimizes page speed with lazy loading
-- Better search engine visibility for quotation requests
-
+## 🎯 SEO & Accessibility
+- Policy page includes proper SEO meta tags
+- All service links properly structured for SEO
+- Maintained accessibility standards throughout
