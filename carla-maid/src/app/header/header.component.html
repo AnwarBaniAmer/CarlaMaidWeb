@@ -3,9 +3,9 @@
     <div class="nav-container">
       <div class="logo">
         @if( getLang() == 'en'){
-          <img src="../../assets/images/carla-en.png" alt="logo">
+          <img src="../../assets/images/carla-en.png" alt="Carla Maid Qatar - Professional Cleaning Services Logo">
         }@else {
-          <img src="../../assets/images/carla-ar.png" alt="logo-ar">
+          <img src="../../assets/images/carla-ar.png" alt="كارلا ميد قطر - خدمات التنظيف الاحترافية شعار">
         }
       </div>
       
@@ -29,7 +29,10 @@
             <li class="nav-item has-dropdown" 
                 (mouseenter)="openServicesDropdown()" 
                 (mouseleave)="closeServicesDropdown()">
-              <a [routerLink]="item.link" class="nav-link" (click)="closeMobileMenu()">
+              <a [routerLink]="item.link" 
+                 routerLinkActive="active" 
+                 class="nav-link" 
+                 (click)="closeMobileMenu()">
                 <span [class]="item.icon"></span>
                 <span class="ml-2">{{ item.label }}</span>
                 <svg class="dropdown-arrow" [class.open]="isServicesDropdownOpen" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -62,9 +65,13 @@
                 }
               </ul>
             </li>
-          } @else {
+          }             @else {
             <li class="nav-item">
-              <a [routerLink]="item.link" class="nav-link" (click)="closeMobileMenu()">
+              <a [routerLink]="item.link" 
+                 routerLinkActive="active" 
+                 [routerLinkActiveOptions]="{exact: item.link === '/'}"
+                 class="nav-link" 
+                 (click)="closeMobileMenu()">
                 <span [class]="item.icon"></span>
                 <span class="ml-2">{{ item.label }}</span>
               </a>
@@ -74,7 +81,9 @@
       </ul>
       
       <div class="nav-end">
-        <span routerLink="/contact-us" class="clickable contact-link">{{'shared.contactUs' | translate}}</span>
+        <a routerLink="/contact-us" 
+           routerLinkActive="active"
+           class="clickable contact-link">{{'shared.contactUs' | translate}}</a>
         <button class="translation-button" (click)="switchLanguage()">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="Navigation / Globe">

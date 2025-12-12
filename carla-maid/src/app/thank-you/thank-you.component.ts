@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { BookingOrder } from '../shared/services/booking.service';
+import { SeoService } from '../shared/services/seo.service';
 
 @Component({
   selector: 'app-thank-you',
@@ -15,11 +16,28 @@ export class ThankYouComponent implements OnInit {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private translate = inject(TranslateService);
+  private seoService = inject(SeoService);
 
   bookingDetails: BookingOrder | null = null;
   orderId: string | null = null;
 
   ngOnInit(): void {
+    // Set SEO - noindex for thank you page
+    this.seoService.setPageSeo({
+      title: 'Thank You | Booking Confirmed | Carla Maid Qatar',
+      description: 'Thank you for booking with Carla Maid Qatar. Your cleaning service booking has been confirmed. We will contact you soon.',
+      keywords: 'booking confirmed, thank you, Carla Maid booking',
+      image: 'https://carlamaid.qa/assets/images/logo.png',
+      url: 'https://carlamaid.qa/thank-you',
+      type: 'website'
+    });
+
+    // Set noindex for thank you page (don't want it indexed)
+    const metaRobots = document.querySelector('meta[name="robots"]');
+    if (metaRobots) {
+      metaRobots.setAttribute('content', 'noindex, nofollow');
+    }
+
     // Get booking details from route state
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras?.state) {

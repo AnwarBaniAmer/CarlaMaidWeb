@@ -15,6 +15,23 @@
     </div>
     
     <div class="blog-content" [innerHTML]="_sharedService.sanitizeHtml(selectedPost.content.rendered)"></div>
+    
+    <!-- Internal Linking Section -->
+    <div class="blog-cta-section">
+      <div class="blog-cta-card">
+        <h3>{{ 'blogs.relatedServices' | translate }}</h3>
+        <p>{{ 'blogs.exploreOurServices' | translate }}</p>
+        <div class="blog-cta-links">
+          <a routerLink="/our-services" class="blog-cta-link">{{ 'shared.ourServices' | translate }}</a>
+          <a routerLink="/services/home-cleaning" class="blog-cta-link">{{ 'shared.HomeCleaninginQatar' | translate }}</a>
+          <a routerLink="/services/office-cleaning" class="blog-cta-link">{{ 'shared.OfficeCleaningServices' | translate }}</a>
+          <a routerLink="/services/deep-cleaning" class="blog-cta-link">{{ 'shared.DeepCleaningServices' | translate }}</a>
+        </div>
+        <a routerLink="/book-now" class="blog-book-btn">
+          <span>{{ 'shared.bookCleanService' | translate }}</span>
+        </a>
+      </div>
+    </div>
 </div>
 
 <div *ngIf="!selectedPost" class="loading-container">

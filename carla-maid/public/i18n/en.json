@@ -223,7 +223,13 @@
         "noPosts": "No posts available.",
         "readMore": "Read More",
         "category": "Category",
-        "loading": "Loading blog..."
+        "loading": "Loading blog...",
+        "relatedServices": "Explore Our Cleaning Services in Qatar",
+        "exploreOurServices": "Discover professional cleaning solutions for your home or business in Doha. Book your service today!",
+        "totalBlogs": "Total Blogs",
+        "loadMore": "Load More",
+        "loadingMore": "Loading more blogs...",
+        "retry": "Retry"
     },
     "experience": {
         "textTitle": "Experience the Finest Clean with Carla Maid",

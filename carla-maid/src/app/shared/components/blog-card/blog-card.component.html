@@ -2,6 +2,7 @@
   <div class="blog-image">
     <img [src]="getFirstImage(blog().content.rendered)" 
          [alt]="stripHtml(blog().title.rendered)"
+         loading="lazy"
          (error)="onImageError($event)">
   </div>
   

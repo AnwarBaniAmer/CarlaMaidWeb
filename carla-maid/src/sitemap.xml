@@ -1,51 +1,176 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- Homepage -->
   <url>
     <loc>https://carlamaid.qa/</loc>
-    <lastmod>2024-12-27</lastmod>
+    <lastmod>2024-12-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://carlamaid.qa/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://carlamaid.qa/ar/" />
   </url>
   
+  <!-- Main Pages -->
   <url>
     <loc>https://carlamaid.qa/about-us</loc>
-    <lastmod>2024-12-27</lastmod>
+    <lastmod>2024-12-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://carlamaid.qa/about-us" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://carlamaid.qa/ar/about-us" />
   </url>
 
   <url>
     <loc>https://carlamaid.qa/our-services</loc>
-    <lastmod>2024-12-21</lastmod>
+    <lastmod>2024-12-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://carlamaid.qa/our-services" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://carlamaid.qa/ar/our-services" />
   </url>
 
   <url>
     <loc>https://carlamaid.qa/contact-us</loc>
-    <lastmod>2024-12-27</lastmod>
+    <lastmod>2024-12-12</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://carlamaid.qa/contact-us" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://carlamaid.qa/ar/contact-us" />
   </url>
 
   <url>
-    <loc>https://carlamaid.qa/blogs</loc>
-    <lastmod>2024-12-27</lastmod>
+    <loc>https://carlamaid.qa/blogs-list</loc>
+    <lastmod>2024-12-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://carlamaid.qa/blogs-open</loc>
-    <lastmod>2024-12-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://carlamaid.qa/blogs-list" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://carlamaid.qa/ar/blogs-list" />
   </url>
 
   <url>
     <loc>https://carlamaid.qa/book-now</loc>
-    <lastmod>2024-12-27</lastmod>
+    <lastmod>2024-12-12</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://carlamaid.qa/book-now" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://carlamaid.qa/ar/book-now" />
+  </url>
+
+  <url>
+    <loc>https://carlamaid.qa/thank-you</loc>
+    <lastmod>2024-12-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://carlamaid.qa/thank-you" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://carlamaid.qa/ar/thank-you" />
+  </url>
+
+  <!-- Service Pages -->
+  <url>
+    <loc>https://carlamaid.qa/services/office-cleaning</loc>
+    <lastmod>2024-12-12</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://carlamaid.qa/services/office-cleaning" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://carlamaid.qa/ar/services/office-cleaning" />
+  </url>
+
+  <url>
+    <loc>https://carlamaid.qa/services/hospitality-staff</loc>
+    <lastmod>2024-12-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://carlamaid.qa/services/hospitality-staff" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://carlamaid.qa/ar/services/hospitality-staff" />
+  </url>
+
+  <url>
+    <loc>https://carlamaid.qa/services/deep-cleaning</loc>
+    <lastmod>2024-12-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://carlamaid.qa/services/deep-cleaning" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://carlamaid.qa/ar/services/deep-cleaning" />
+  </url>
+
+  <url>
+    <loc>https://carlamaid.qa/services/home-cleaning</loc>
+    <lastmod>2024-12-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://carlamaid.qa/services/home-cleaning" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://carlamaid.qa/ar/services/home-cleaning" />
+  </url>
+
+  <url>
+    <loc>https://carlamaid.qa/services/maid-services</loc>
+    <lastmod>2024-12-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://carlamaid.qa/services/maid-services" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://carlamaid.qa/ar/services/maid-services" />
+  </url>
+
+  <url>
+    <loc>https://carlamaid.qa/services/event-cleaning</loc>
+    <lastmod>2024-12-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://carlamaid.qa/services/event-cleaning" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://carlamaid.qa/ar/services/event-cleaning" />
+  </url>
+
+  <url>
+    <loc>https://carlamaid.qa/services/eco-friendly-cleaning</loc>
+    <lastmod>2024-12-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://carlamaid.qa/services/eco-friendly-cleaning" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://carlamaid.qa/ar/services/eco-friendly-cleaning" />
+  </url>
+
+  <url>
+    <loc>https://carlamaid.qa/services/housekeeping</loc>
+    <lastmod>2024-12-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://carlamaid.qa/services/housekeeping" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://carlamaid.qa/ar/services/housekeeping" />
+  </url>
+
+  <url>
+    <loc>https://carlamaid.qa/services/carpet-cleaning</loc>
+    <lastmod>2024-12-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://carlamaid.qa/services/carpet-cleaning" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://carlamaid.qa/ar/services/carpet-cleaning" />
+  </url>
+
+  <url>
+    <loc>https://carlamaid.qa/services/staffing-businesses</loc>
+    <lastmod>2024-12-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://carlamaid.qa/services/staffing-businesses" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://carlamaid.qa/ar/services/staffing-businesses" />
+  </url>
+
+  <url>
+    <loc>https://carlamaid.qa/services/customized-cleaning</loc>
+    <lastmod>2024-12-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://carlamaid.qa/services/customized-cleaning" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://carlamaid.qa/ar/services/customized-cleaning" />
+  </url>
+
+  <url>
+    <loc>https://carlamaid.qa/services/seasonal-cleaning</loc>
+    <lastmod>2024-12-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://carlamaid.qa/services/seasonal-cleaning" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://carlamaid.qa/ar/services/seasonal-cleaning" />
   </url>
 </urlset> 
