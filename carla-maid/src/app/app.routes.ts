@@ -64,6 +64,10 @@ export const routes: Routes = [
     {
         path: 'view-blogs/:id',
         loadComponent: () => import('./view-blogs/view-blogs.component').then(m => m.ViewBlogsComponent)
+    },
+    {
+        path: 'thank-you',
+        loadComponent: () => import('./thank-you/thank-you.component').then(m => m.ThankYouComponent)
     }
 ];
 export default routes;

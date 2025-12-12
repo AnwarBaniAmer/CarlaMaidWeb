@@ -1,0 +1,371 @@
+.thank-you-container
+  min-height: 100vh
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)
+  padding: 2rem 1rem
+  display: flex
+  justify-content: center
+  align-items: center
+
+  .thank-you-content
+    max-width: 900px
+    width: 100%
+    background: white
+    border-radius: 24px
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1)
+    padding: 3rem 2rem
+    animation: fadeInUp 0.6s ease-out
+
+    @media (max-width: 768px)
+      padding: 2rem 1.5rem
+      border-radius: 16px
+
+// Success Animation
+.success-animation
+  position: relative
+  display: flex
+  justify-content: center
+  margin-bottom: 2rem
+
+  .success-icon-wrapper
+    position: relative
+    z-index: 2
+
+    .success-icon
+      .circle-animation
+        stroke-dasharray: 62.83
+        stroke-dashoffset: 62.83
+        animation: drawCircle 0.6s ease-out forwards
+
+      .check-animation
+        stroke-dasharray: 20
+        stroke-dashoffset: 20
+        animation: drawCheck 0.4s ease-out 0.6s forwards
+
+  .confetti
+    position: absolute
+    width: 100%
+    height: 100%
+    overflow: hidden
+    pointer-events: none
+
+    .confetti-piece
+      position: absolute
+      width: 10px
+      height: 10px
+      background: #10B981
+      animation: confettiFall 3s ease-out infinite
+
+      &:nth-child(1)
+        left: 10%
+        animation-delay: 0s
+        background: #10B981
+
+      &:nth-child(2)
+        left: 20%
+        animation-delay: 0.2s
+        background: #3B82F6
+
+      &:nth-child(3)
+        left: 30%
+        animation-delay: 0.4s
+        background: #F59E0B
+
+      &:nth-child(4)
+        left: 40%
+        animation-delay: 0.6s
+        background: #EF4444
+
+      &:nth-child(5)
+        left: 50%
+        animation-delay: 0.8s
+        background: #8B5CF6
+
+      &:nth-child(6)
+        left: 60%
+        animation-delay: 1s
+        background: #EC4899
+
+      &:nth-child(7)
+        left: 70%
+        animation-delay: 1.2s
+        background: #14B8A6
+
+      &:nth-child(8)
+        left: 80%
+        animation-delay: 1.4s
+        background: #F97316
+
+// Thank You Message
+.thank-you-message
+  text-align: center
+  margin-bottom: 3rem
+
+  .thank-you-title
+    font-size: 2.5rem
+    font-weight: 700
+    color: #1f2937
+    margin-bottom: 1rem
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%)
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
+    background-clip: text
+
+    @media (max-width: 768px)
+      font-size: 2rem
+
+  .thank-you-subtitle
+    font-size: 1.25rem
+    color: #4b5563
+    margin-bottom: 0.5rem
+    font-weight: 500
+
+  .thank-you-description
+    font-size: 1rem
+    color: #6b7280
+    line-height: 1.6
+
+// Booking Details Card
+.booking-details-card
+  background: #f9fafb
+  border-radius: 16px
+  padding: 2rem
+  margin-bottom: 2rem
+  border: 1px solid #e5e7eb
+
+  .card-header
+    display: flex
+    justify-content: space-between
+    align-items: center
+    margin-bottom: 2rem
+    flex-wrap: wrap
+    gap: 1rem
+
+    h2
+      font-size: 1.5rem
+      font-weight: 600
+      color: #1f2937
+      margin: 0
+
+    .order-id-badge
+      background: white
+      padding: 0.5rem 1rem
+      border-radius: 8px
+      border: 1px solid #e5e7eb
+      display: flex
+      align-items: center
+      gap: 0.5rem
+
+      .badge-label
+        font-size: 0.875rem
+        color: #6b7280
+        font-weight: 500
+
+      .badge-value
+        font-size: 0.875rem
+        color: #1f2937
+        font-weight: 600
+        font-family: monospace
+
+  .details-grid
+    display: grid
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))
+    gap: 1.5rem
+
+    @media (max-width: 768px)
+      grid-template-columns: 1fr
+
+  .detail-section
+    background: white
+    border-radius: 12px
+    padding: 1.5rem
+    border: 1px solid #e5e7eb
+    transition: all 0.3s ease
+
+    &:hover
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1)
+      transform: translateY(-2px)
+
+    &.highlight
+      background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%)
+      border-color: #10B981
+
+    .section-icon
+      width: 48px
+      height: 48px
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%)
+      border-radius: 12px
+      display: flex
+      align-items: center
+      justify-content: center
+      margin-bottom: 1rem
+      color: white
+
+    .section-content
+      h3
+        font-size: 1.125rem
+        font-weight: 600
+        color: #1f2937
+        margin-bottom: 1rem
+
+      .detail-item
+        display: flex
+        justify-content: space-between
+        align-items: flex-start
+        padding: 0.75rem 0
+        border-bottom: 1px solid #f3f4f6
+
+        &:last-child
+          border-bottom: none
+
+        .detail-label
+          font-size: 0.875rem
+          color: #6b7280
+          font-weight: 500
+          flex: 1
+
+        .detail-value
+          font-size: 0.875rem
+          color: #1f2937
+          font-weight: 600
+          text-align: right
+          flex: 1
+
+          &.payment-method
+            color: #059669
+            font-weight: 700
+
+        &.total-price
+          margin-top: 1rem
+          padding-top: 1rem
+          border-top: 2px solid #e5e7eb
+
+          .price
+            font-size: 1.25rem
+            color: #059669
+            font-weight: 700
+
+      .payment-note
+        margin-top: 1rem
+        padding: 1rem
+        background: white
+        border-radius: 8px
+        border-left: 4px solid #10B981
+
+        p
+          margin: 0
+          font-size: 0.875rem
+          color: #374151
+          line-height: 1.5
+
+  .order-only
+    text-align: center
+    padding: 2rem
+
+    p
+      font-size: 1rem
+      color: #4b5563
+      margin-bottom: 0.5rem
+
+      strong
+        color: #1f2937
+        font-weight: 600
+
+// Action Buttons
+.action-buttons
+  display: flex
+  gap: 1rem
+  justify-content: center
+  margin-bottom: 2rem
+  flex-wrap: wrap
+
+  .btn-primary, .btn-secondary
+    padding: 0.875rem 2rem
+    border-radius: 8px
+    font-size: 1rem
+    font-weight: 600
+    cursor: pointer
+    transition: all 0.3s ease
+    border: none
+    min-width: 160px
+
+  .btn-primary
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%)
+    color: white
+
+    &:hover
+      transform: translateY(-2px)
+      box-shadow: 0 8px 16px rgba(16, 185, 129, 0.3)
+
+  .btn-secondary
+    background: white
+    color: #10B981
+    border: 2px solid #10B981
+
+    &:hover
+      background: #10B981
+      color: white
+      transform: translateY(-2px)
+
+// Additional Info
+.additional-info
+  margin-top: 2rem
+
+  .info-card
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)
+    border-radius: 12px
+    padding: 1.5rem
+    display: flex
+    gap: 1rem
+    border: 1px solid #bfdbfe
+
+    .info-icon
+      width: 48px
+      height: 48px
+      background: white
+      border-radius: 12px
+      display: flex
+      align-items: center
+      justify-content: center
+      color: #3B82F6
+      flex-shrink: 0
+
+    .info-content
+      flex: 1
+
+      h4
+        font-size: 1.125rem
+        font-weight: 600
+        color: #1f2937
+        margin-bottom: 0.5rem
+
+      p
+        font-size: 0.875rem
+        color: #4b5563
+        line-height: 1.6
+        margin: 0
+
+// Animations
+@keyframes fadeInUp
+  from
+    opacity: 0
+    transform: translateY(30px)
+  to
+    opacity: 1
+    transform: translateY(0)
+
+@keyframes drawCircle
+  to
+    stroke-dashoffset: 0
+
+@keyframes drawCheck
+  to
+    stroke-dashoffset: 0
+
+@keyframes confettiFall
+  0%
+    transform: translateY(-100px) rotate(0deg)
+    opacity: 1
+  100%
+    transform: translateY(500px) rotate(720deg)
+    opacity: 0
+

@@ -655,5 +655,23 @@
             "included4": "Outdoor area preparation",
             "included5": "Seasonal decoration handling"
         }
+    },
+    "thankYou": {
+        "title": "Thank You for Your Booking!",
+        "subtitle": "Your booking has been confirmed successfully",
+        "description": "We've received your booking request and our team will contact you shortly to confirm the details.",
+        "bookingDetails": "Booking Details",
+        "orderId": "Order ID",
+        "customerInfo": "Customer Information",
+        "serviceDetails": "Service Details",
+        "schedule": "Schedule",
+        "paymentInfo": "Payment Information",
+        "hours": "hours",
+        "paymentNote": "You have chosen to pay later. Payment will be collected when the cleaning service is completed.",
+        "backToHome": "Back to Home",
+        "bookAnother": "Book Another Service",
+        "whatsNext": "What's Next?",
+        "whatsNextDescription": "Our team will contact you within 24 hours to confirm your booking and finalize all the details. Please keep your phone available.",
+        "orderOnlyMessage": "Your booking has been successfully created. We will contact you soon with more details."
     }
 }
