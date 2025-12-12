@@ -401,7 +401,7 @@ export class BookNowComponent implements OnInit {
         console.log("bookingResponse", bookingResponse);
         
         if (bookingResponse.success) {
-          this.handleSuccessfulBooking();
+          this.handleSuccessfulBooking(bookingResponse);
         } else {
           this.setPaymentError(bookingResponse.error || 'Failed to create booking');
         }
@@ -452,11 +452,8 @@ export class BookNowComponent implements OnInit {
     };
   }
 
-  private handleSuccessfulBooking(): void {
-    this.sent = true;
-    this.resetForm();
+  private handleSuccessfulBooking(bookingResponse?: BookingResponse): void {
     this.trackBookingCompletion();
-    this.scheduleFormReset();
     
     // Reset processing state after successful booking
     this.setPaymentProcessingState(false);
@@ -464,7 +461,32 @@ export class BookNowComponent implements OnInit {
     // Show appropriate success message based on payment option
     if (this.isPayLaterOption()) {
       console.log('Booking created successfully with pay later option');
-      // You can add specific success handling for pay later here
+      
+      // Prepare booking details for thank-you page
+      const bookingData = this.buildBookingData();
+      const bookingRequest = this.buildBookingRequest('pay_later');
+      
+      // Use booking response data if available, otherwise use form data
+      const bookingDetails = bookingResponse?.order || {
+        ...bookingRequest,
+        total: this.price,
+        status: 'pending' as const,
+        createdAt: new Date().toISOString(),
+        id: bookingResponse?.orderId || `BOOKING_${Date.now()}`
+      };
+      
+      // Navigate to thank-you page with booking details
+      this.router.navigate(['/thank-you'], {
+        state: {
+          bookingDetails: bookingDetails,
+          orderId: bookingResponse?.orderId || bookingDetails.id
+        }
+      });
+    } else {
+      // For pay now, keep the existing behavior
+      this.sent = true;
+      this.resetForm();
+      this.scheduleFormReset();
     }
   }
 
