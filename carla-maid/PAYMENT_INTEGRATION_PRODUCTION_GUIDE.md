@@ -58,12 +58,13 @@ Webhook notification → Backend processing → Booking creation → Google Form
 
 ### SkipCash Configuration
 ```javascript
+// ⚠️ SECURITY: Never hardcode credentials. Use environment variables.
 production: {
   apiUrl: 'https://api.skipcash.app',
-  clientId: '7242ee4f-ca43-44bb-804c-4f0c621bb54d',
-  apiKey: '2ce8c700-f8e6-4cc5-b59a-0069f368815d',
-  secretKey: '[PRODUCTION_SECRET_KEY]',
-  webhookKey: '43ef9131-140e-4871-8586-94b8f69f32b2'
+  clientId: process.env.SKIPCASH_PRODUCTION_CLIENT_ID || 'YOUR_PRODUCTION_CLIENT_ID',
+  apiKey: process.env.SKIPCASH_PRODUCTION_API_KEY || 'YOUR_PRODUCTION_API_KEY',
+  secretKey: process.env.SKIPCASH_PRODUCTION_SECRET_KEY || 'YOUR_PRODUCTION_SECRET_KEY',
+  webhookKey: process.env.SKIPCASH_PRODUCTION_WEBHOOK_KEY || 'YOUR_PRODUCTION_WEBHOOK_KEY'
 }
 ```
 

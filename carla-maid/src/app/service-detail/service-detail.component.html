@@ -1,0 +1,207 @@
+@if (currentService) {
+  <!-- Hero Section -->
+  <section class="hero-section" [style.background-image]="'url(' + currentService.heroBackground + ')'">
+    <div class="hero-overlay" [style.background]="currentService.gradient" style="opacity: 0.6;"></div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <span class="service-badge">
+          <span class="badge-icon">{{ currentService.icon }}</span>
+          <span>{{ 'serviceDetail.premiumService' | translate }}</span>
+        </span>
+        <h1 class="hero-title">{{ currentService.titleKey | translate }}</h1>
+        <p class="hero-subtitle">{{ currentService.subtitleKey | translate }}</p>
+        <div class="hero-actions">
+          <a routerLink="/book-now" class="btn-primary">
+            <span>{{ 'shared.bookNow' | translate }}</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a routerLink="/contact-us" class="btn-secondary">
+            <span>{{ 'shared.contactUs' | translate }}</span>
+          </a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="image-wrapper">
+          <img [src]="currentService.heroImage" [alt]="currentService.titleKey | translate">
+          <div class="floating-card card-1">
+            <span class="card-icon">✓</span>
+            <span>{{ 'serviceDetail.qualityGuaranteed' | translate }}</span>
+          </div>
+          <div class="floating-card card-2">
+            <span class="card-icon">⭐</span>
+            <span>{{ 'serviceDetail.topRated' | translate }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-wave">
+      <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V120Z" fill="white"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Description Section -->
+  <section class="description-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag" [style.color]="currentService.color">{{ 'serviceDetail.aboutService' | translate }}</span>
+        <h2>{{ currentService.titleKey | translate }}</h2>
+      </div>
+      <p class="description-text">{{ currentService.descriptionKey | translate }}</p>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="container">
+      <div class="section-header centered">
+        <span class="section-tag" [style.color]="currentService.color">{{ 'serviceDetail.whatWeOffer' | translate }}</span>
+        <h2>{{ 'serviceDetail.keyFeatures' | translate }}</h2>
+      </div>
+      <div class="features-grid">
+        @for (feature of currentService.features; track feature.titleKey) {
+          <div class="feature-card">
+            <div class="feature-icon" [style.background]="currentService.gradient">
+              <span>{{ feature.icon }}</span>
+            </div>
+            <h3>{{ feature.titleKey | translate }}</h3>
+            <p>{{ feature.descriptionKey | translate }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="benefits-section" [style.background]="currentService.gradient">
+    <div class="container">
+      <div class="benefits-content">
+        <div class="benefits-text">
+          <span class="section-tag light">{{ 'serviceDetail.whyChooseUs' | translate }}</span>
+          <h2>{{ 'serviceDetail.benefitsTitle' | translate }}</h2>
+          <ul class="benefits-list">
+            @for (benefit of currentService.benefitsKeys; track benefit) {
+              <li>
+                <span class="check-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span>{{ benefit | translate }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+        <div class="benefits-image">
+          <div class="stats-card">
+            <div class="stat">
+              <span class="stat-number">500+</span>
+              <span class="stat-label">{{ 'serviceDetail.happyClients' | translate }}</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">98%</span>
+              <span class="stat-label">{{ 'serviceDetail.satisfaction' | translate }}</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">24/7</span>
+              <span class="stat-label">{{ 'serviceDetail.support' | translate }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's Included Section -->
+  <section class="included-section">
+    <div class="container">
+      <div class="section-header centered">
+        <span class="section-tag" [style.color]="currentService.color">{{ 'serviceDetail.servicePackage' | translate }}</span>
+        <h2>{{ 'serviceDetail.whatsIncluded' | translate }}</h2>
+      </div>
+      <div class="included-grid">
+        @for (item of currentService.includedKeys; track item; let i = $index) {
+          <div class="included-item" [style.animation-delay]="i * 0.1 + 's'">
+            <div class="included-number" [style.background]="currentService.gradient">{{ i + 1 }}</div>
+            <p>{{ item | translate }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-card" [style.background]="currentService.gradient">
+        <div class="cta-content">
+          <h2>{{ 'serviceDetail.readyToBook' | translate }}</h2>
+          <p>{{ 'serviceDetail.ctaDescription' | translate }}</p>
+          <div class="cta-actions">
+            <a routerLink="/book-now" class="btn-white">
+              <span>{{ 'shared.bookNow' | translate }}</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <a href="tel:+97471236660" class="btn-outline-white">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 5.5C3 14.0604 9.93959 21 18.5 21C18.8862 21 19.2691 20.9859 19.6483 20.9581C20.0834 20.9262 20.3009 20.9103 20.499 20.7963C20.663 20.7019 20.8185 20.5345 20.9007 20.364C21 20.1582 21 19.9181 21 19.438V16.6207C21 16.2169 21 16.015 20.9335 15.842C20.8749 15.6891 20.7795 15.553 20.6559 15.4456C20.516 15.324 20.3262 15.255 19.9468 15.117L16.74 13.9509C16.2985 13.7904 16.0777 13.7101 15.8683 13.7237C15.6836 13.7357 15.5059 13.7988 15.3549 13.9058C15.1837 14.0271 15.0629 14.2285 14.8212 14.6314L14 16C11.3501 14.7999 9.2019 12.6489 8 10L9.36863 9.17882C9.77145 8.93713 9.97286 8.81628 10.0942 8.64506C10.2012 8.49408 10.2643 8.31637 10.2763 8.1317C10.2899 7.92227 10.2096 7.70153 10.0491 7.26005L8.88299 4.05321C8.745 3.67376 8.67601 3.48403 8.55442 3.3441C8.44701 3.22049 8.31089 3.12515 8.15802 3.06645C7.98496 3 7.78308 3 7.37932 3H4.56201C4.08188 3 3.84181 3 3.63598 3.09925C3.4655 3.18146 3.29814 3.33701 3.20366 3.50103C3.08972 3.69907 3.07376 3.91662 3.04185 4.35173C3.01413 4.73086 3 5.11378 3 5.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>+974 7123 6660</span>
+            </a>
+          </div>
+        </div>
+        <div class="cta-decoration">
+          <div class="deco-circle deco-1"></div>
+          <div class="deco-circle deco-2"></div>
+          <div class="deco-circle deco-3"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Other Services Section -->
+  <section class="other-services-section">
+    <div class="container">
+      <div class="section-header centered">
+        <span class="section-tag" [style.color]="currentService.color">{{ 'serviceDetail.exploreMore' | translate }}</span>
+        <h2>{{ 'serviceDetail.otherServices' | translate }}</h2>
+      </div>
+      <div class="other-services-grid">
+        @for (service of getOtherServices(); track service.id) {
+          <a [routerLink]="['/services', service.slug]" class="service-card">
+            <div class="service-card-icon" [style.background]="service.gradient">
+              <span>{{ service.icon }}</span>
+            </div>
+            <h3>{{ service.titleKey | translate }}</h3>
+            <p>{{ service.subtitleKey | translate }}</p>
+            <span class="service-card-link" [style.color]="service.color">
+              {{ 'serviceDetail.learnMore' | translate }}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+} @else {
+  <!-- Service Not Found -->
+  <section class="not-found-section">
+    <div class="container">
+      <div class="not-found-content">
+        <span class="not-found-icon">🔍</span>
+        <h1>{{ 'serviceDetail.serviceNotFound' | translate }}</h1>
+        <p>{{ 'serviceDetail.serviceNotFoundDesc' | translate }}</p>
+        <a routerLink="/our-services" class="btn-primary">
+          <span>{{ 'serviceDetail.viewAllServices' | translate }}</span>
+        </a>
+      </div>
+    </div>
+  </section>
+}

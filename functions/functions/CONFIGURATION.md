@@ -36,19 +36,21 @@ The Firebase Functions use hardcoded configuration values extracted from the Lar
 | Variable | Description | Default Value |
 |----------|-------------|---------------|
 | `SKIPCASH_PRODUCTION_API_URL` | Production API URL | `https://api.skipcash.app` |
-| `SKIPCASH_PRODUCTION_CLIENT_ID` | Production client ID | `7242ee4f-ca43-44bb-804c-4f0c621bb54d` |
-| `SKIPCASH_PRODUCTION_API_KEY` | Production API key | `2ce8c700-f8e6-4cc5-b59a-0069f368815d` |
-| `SKIPCASH_PRODUCTION_SECRET_KEY` | Production secret key | `[long secret key]` |
-| `SKIPCASH_PRODUCTION_WEBHOOK_KEY` | Production webhook key | `43ef9131-140e-4871-8586-94b8f69f32b2` |
+| `SKIPCASH_PRODUCTION_CLIENT_ID` | Production client ID | `YOUR_PRODUCTION_CLIENT_ID` |
+| `SKIPCASH_PRODUCTION_API_KEY` | Production API key | `YOUR_PRODUCTION_API_KEY` |
+| `SKIPCASH_PRODUCTION_SECRET_KEY` | Production secret key | `YOUR_PRODUCTION_SECRET_KEY` |
+| `SKIPCASH_PRODUCTION_WEBHOOK_KEY` | Production webhook key | `YOUR_PRODUCTION_WEBHOOK_KEY` |
 
 #### Sandbox Environment
 | Variable | Description | Default Value |
 |----------|-------------|---------------|
 | `SKIPCASH_SANDBOX_API_URL` | Sandbox API URL | `https://skipcashtest.azurewebsites.net` |
-| `SKIPCASH_SANDBOX_CLIENT_ID` | Sandbox client ID | `3d8fecfa-f2c0-4fc8-a913-91634b306eec` |
-| `SKIPCASH_SANDBOX_API_KEY` | Sandbox API key | `288d604d-03b6-4c66-821e-0a82a3fd2cc8` |
-| `SKIPCASH_SANDBOX_SECRET_KEY` | Sandbox secret key | `[long secret key]` |
-| `SKIPCASH_SANDBOX_WEBHOOK_KEY` | Sandbox webhook key | `a269aaab-8381-4b63-8c83-f1e612494183` |
+| `SKIPCASH_SANDBOX_CLIENT_ID` | Sandbox client ID | `YOUR_SANDBOX_CLIENT_ID` |
+| `SKIPCASH_SANDBOX_API_KEY` | Sandbox API key | `YOUR_SANDBOX_API_KEY` |
+| `SKIPCASH_SANDBOX_SECRET_KEY` | Sandbox secret key | `YOUR_SANDBOX_SECRET_KEY` |
+| `SKIPCASH_SANDBOX_WEBHOOK_KEY` | Sandbox webhook key | `YOUR_SANDBOX_WEBHOOK_KEY` |
+
+**⚠️ SECURITY WARNING:** Never commit actual credentials to version control. Get your credentials from the SkipCash Merchant Portal and set them as environment variables in Firebase Functions.
 
 ## Configuration Management
 
@@ -91,11 +93,19 @@ const apiKey = skipCashConfig.apiKey;
 
 ## Security Notes
 
-- Configuration values are hardcoded in the source code
-- API keys and secrets are included in the configuration
+- ⚠️ **CRITICAL:** Never hardcode credentials in source code
+- ✅ Use environment variables for all sensitive data (already implemented in `src/config.ts`)
+- Set credentials in Firebase Functions environment variables:
+  ```bash
+  firebase functions:config:set skipcash.production.client_id="YOUR_CLIENT_ID"
+  firebase functions:config:set skipcash.production.api_key="YOUR_API_KEY"
+  firebase functions:config:set skipcash.production.secret_key="YOUR_SECRET_KEY"
+  firebase functions:config:set skipcash.production.webhook_key="YOUR_WEBHOOK_KEY"
+  ```
 - Use test mode during development
 - Validate webhook signatures in production
-- Consider moving sensitive data to environment variables for production deployments
+- Rotate credentials regularly (every 90 days recommended)
+- Never commit `.env` files or credentials to version control
 
 ## Migration from Laravel
 

@@ -25,12 +25,51 @@
         </button>
         
         @for (item of items; track item.link) {
-          <li class="nav-item">
-            <a [routerLink]="item.link" class="nav-link" (click)="closeMobileMenu()">
-              <span [class]="item.icon"></span>
-              <span class="ml-2">{{ item.label }}</span>
-            </a>
-          </li>
+          @if (item.hasDropdown) {
+            <li class="nav-item has-dropdown" 
+                (mouseenter)="openServicesDropdown()" 
+                (mouseleave)="closeServicesDropdown()">
+              <a [routerLink]="item.link" class="nav-link" (click)="closeMobileMenu()">
+                <span [class]="item.icon"></span>
+                <span class="ml-2">{{ item.label }}</span>
+                <svg class="dropdown-arrow" [class.open]="isServicesDropdownOpen" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <!-- Desktop Dropdown -->
+              <div class="services-dropdown" [class.open]="isServicesDropdownOpen">
+                <div class="dropdown-content">
+                  @for (service of item.services; track service.translationKey) {
+                    <a [routerLink]="['/services', service.slug]" class="dropdown-item" (click)="closeServicesDropdown(); closeMobileMenu()">
+                      {{ service.label }}
+                    </a>
+                  }
+                </div>
+              </div>
+              <!-- Mobile Services List -->
+              <button class="mobile-dropdown-toggle" (click)="toggleServicesDropdown(); $event.stopPropagation()">
+                <svg [class.rotated]="isServicesDropdownOpen" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <ul class="mobile-services-list" [class.open]="isServicesDropdownOpen">
+                @for (service of item.services; track service.translationKey) {
+                  <li>
+                    <a [routerLink]="['/services', service.slug]" (click)="closeServicesDropdown(); closeMobileMenu()">
+                      {{ service.label }}
+                    </a>
+                  </li>
+                }
+              </ul>
+            </li>
+          } @else {
+            <li class="nav-item">
+              <a [routerLink]="item.link" class="nav-link" (click)="closeMobileMenu()">
+                <span [class]="item.icon"></span>
+                <span class="ml-2">{{ item.label }}</span>
+              </a>
+            </li>
+          }
         }
       </ul>
       
