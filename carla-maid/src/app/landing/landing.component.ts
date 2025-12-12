@@ -13,6 +13,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { NgOptimizedImage } from '@angular/common';
 import { WordPressService } from '../shared/services/word-press.service';
 import { SharedService } from '../shared/services/shared.service';
+import { SeoService } from '../shared/services/seo.service';
 import { PhoneTrackDirective } from '../shared/directives/phone-track.directive';
 import { BlogCardComponent } from '../shared/components/blog-card/blog-card.component';
 
@@ -77,6 +78,7 @@ export class LandingComponent implements OnInit {
 
   private meta = inject(Meta);
   private titleService = inject(Title);
+  private seoService = inject(SeoService);
 
   lang: string = 'en';
 
@@ -170,30 +172,26 @@ export class LandingComponent implements OnInit {
       }
     ];
 
-    this.titleService.setTitle('Carla Maid Qatar | Professional Cleaning & Maid Services');
+    // Set comprehensive SEO using SEO service with optimized titles and descriptions
+    this.seoService.setPageSeo({
+      title: 'Best Cleaning Services in Qatar | Professional Maid & Housekeeping Doha | Carla Maid',
+      description: 'Top-rated cleaning services in Qatar! Professional maids, housekeeping, office cleaning & eco-friendly solutions in Doha. Trusted by 1000+ customers. Book online or call +974-71236660. Same-day service available!',
+      keywords: 'cleaning services Qatar, maid service Doha, professional cleaners Qatar, home cleaning Doha, office cleaning Qatar, eco-friendly cleaning, housekeeping services Doha, cleaning company Qatar, best cleaning service Doha, maid agency Qatar',
+      image: 'https://carlamaid.qa/assets/images/why-us.png',
+      url: 'https://carlamaid.qa/',
+      type: 'website'
+    });
 
+    // Add additional geo tags
     this.meta.addTags([
-      { name: 'description', content: 'Carla Maid Qatar offers professional cleaning and maid services for homes and businesses. Expert cleaners, eco-friendly solutions, and flexible scheduling. Book your cleaning service in Doha today!' },
-      { name: 'keywords', content: 'cleaning services Qatar, maid service Doha, professional cleaners, home cleaning, office cleaning, eco-friendly cleaning, housekeeping Qatar, cleaning company Doha' },
-      { property: 'og:title', content: 'Carla Maid Qatar | Professional Cleaning & Maid Services' },
-      { property: 'og:description', content: 'Transform your space with Qatar\'s trusted cleaning service. Professional maids, flexible scheduling, and competitive rates for homes and businesses in Doha.' },
-      { property: 'og:type', content: 'website' },
-      { property: 'og:url', content: 'https://carlamaid.qa' },
-      { property: 'og:image', content: 'https://carlamaid.qa/assets/images/why-us.png' },
-      { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:title', content: 'Carla Maid Qatar | Professional Cleaning & Maid Services' },
-      { name: 'twitter:description', content: 'Your trusted cleaning partner in Qatar. Book professional cleaning services for your home or business in Doha.' },
-      { name: 'twitter:image', content: 'https://carlamaid.qa/assets/images/why-us.png' },
       { name: 'robots', content: 'index, follow' },
       { name: 'author', content: 'Carla Maid Qatar' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { 'http-equiv': 'Content-Type', content: 'text/html; charset=utf-8' },
       { name: 'geo.region', content: 'QA' },
       { name: 'geo.placename', content: 'Doha' },
-      { name: 'geo.position', content: '25.2866;51.5310' },
+      { name: 'geo.position', content: '25.3865308;51.5274001' },
       {
         property: 'business:contact_data:street_address',
-        content: 'Lusail Marina'
+        content: 'Manarat lusail - Floor 25 - office 2501'
       },
       {
         property: 'business:contact_data:locality',
@@ -204,6 +202,9 @@ export class LandingComponent implements OnInit {
         content: 'Qatar'
       }
     ]);
+
+    // Add FAQ Schema
+    this.addFaqSchema();
 
     this.lang = this._translate.currentLang;
     
@@ -302,6 +303,81 @@ ngAfterViewInit(): void {
   /**
    * Retrieves posts filtered by multiple category names.
    */
+  private addFaqSchema(): void {
+    const faqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What should I expect from a professional cleaning service in Qatar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Professional cleaning services in Qatar provide expert cleaners, eco-friendly solutions, flexible scheduling, and comprehensive cleaning for homes and businesses. You can expect thorough cleaning, attention to detail, and reliable service."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How often should I schedule cleaning services?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The frequency depends on your needs. We offer daily, weekly, bi-weekly, monthly, and one-time cleaning services. Most customers prefer weekly or bi-weekly services for homes, and daily or weekly for offices."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are eco-friendly cleaning products effective?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, eco-friendly cleaning products are highly effective. They provide the same level of cleanliness while being safe for your family, pets, and the environment. We use certified eco-friendly products that meet professional cleaning standards."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I ensure a cleaning company is reputable?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Look for licensed and insured companies, check customer reviews, verify their experience in Qatar, and ensure they use professional equipment and trained staff. Carla Maid is licensed, insured, and has served 1000+ satisfied customers in Doha."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I request specific cleaning tasks?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely! We offer customized cleaning services tailored to your specific needs. You can request specific areas, tasks, or cleaning methods. Our flexible approach ensures we meet your exact requirements."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the costs of hiring a cleaning company in Qatar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pricing varies based on service type, frequency, and property size. We offer competitive rates starting from 35 QAR per hour for cleaners. Contact us for a free quote tailored to your specific needs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you provide cleaning materials?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we provide all professional cleaning materials and equipment. Our team comes fully equipped with eco-friendly cleaning products, tools, and supplies needed for comprehensive cleaning services."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I book a cleaning service?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can book online through our website, call us at +974-71236660, or email info@carlamaid.qa. We offer instant online booking with flexible scheduling and same-day service availability."
+          }
+        }
+      ]
+    };
+
+    this.seoService.addStructuredData(faqSchema);
+  }
+
   getBlogsPosts(): void {
     this.isLoadingBlogs = true;
     const postsPage = 'blogs';

@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslateModule, TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
+import { SeoService } from '../shared/services/seo.service';
 
 interface ServiceFeature {
   icon: string;
@@ -281,6 +282,8 @@ export class ServiceDetailComponent implements OnInit, OnDestroy {
     }
   ];
 
+  private seoService = inject(SeoService);
+
   constructor(
     private route: ActivatedRoute,
     private translate: TranslateService
@@ -290,10 +293,65 @@ export class ServiceDetailComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(params => {
       const serviceSlug = params['slug'];
       this.currentService = this.services.find(s => s.slug === serviceSlug) || null;
+      
+      if (this.currentService) {
+        this.setServiceSeo(this.currentService);
+      }
     });
 
     this.langChangeSubscription = this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      // Trigger change detection for translations
+      // Update SEO when language changes
+      if (this.currentService) {
+        this.setServiceSeo(this.currentService);
+      }
+    });
+  }
+
+  private setServiceSeo(service: ServiceData): void {
+    const serviceTitle = this.translate.instant(service.titleKey);
+    const serviceDescription = this.translate.instant(service.descriptionKey);
+    const serviceName = serviceTitle.replace(' in Qatar', '').replace(' Qatar', '').replace(' Services', '');
+    
+    // Create optimized title and description
+    const optimizedTitle = this.translate.currentLang === 'ar'
+      ? `${serviceTitle} | Carla Maid`
+      : `Best ${serviceName} in Qatar | Professional ${serviceName} Doha | Carla Maid`;
+    
+    const optimizedDescription = this.translate.currentLang === 'ar'
+      ? serviceDescription
+      : `Professional ${serviceName.toLowerCase()} services in Qatar. Expert cleaners, competitive rates, flexible scheduling. Serving Doha and all Qatar. ${serviceDescription} Book your ${serviceName.toLowerCase()} service today!`;
+    
+    const optimizedKeywords = this.translate.currentLang === 'ar'
+      ? `${serviceName.toLowerCase()} Qatar`
+      : `${serviceName.toLowerCase()} Qatar, ${serviceName.toLowerCase()} Doha, best ${serviceName.toLowerCase()} Qatar, professional ${serviceName.toLowerCase()}, ${serviceName.toLowerCase()} services Doha, ${serviceName.toLowerCase()} company Qatar`;
+    
+    this.seoService.setPageSeo({
+      title: optimizedTitle,
+      description: optimizedDescription,
+      keywords: optimizedKeywords,
+      image: `https://carlamaid.qa/${service.heroImage}`,
+      url: `https://carlamaid.qa/services/${service.slug}`,
+      type: 'website',
+      structuredData: {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": serviceName,
+        "provider": {
+          "@type": "LocalBusiness",
+          "name": "Carla Maid",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Manarat lusail - Floor 25 - office 2501",
+            "addressLocality": "Doha",
+            "addressCountry": "QA"
+          }
+        },
+        "areaServed": {
+          "@type": "City",
+          "name": "Doha"
+        },
+        "description": serviceDescription
+      }
     });
   }
 

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AnalyticsService } from '../shared/services/analytics.service';
+import { SeoService } from '../shared/services/seo.service';
 
 @Component({
   selector: 'app-contact-us',
@@ -16,6 +17,7 @@ export class ContactUsComponent implements OnInit {
   _translate = inject(TranslateService);
   sanitizer = inject(DomSanitizer);
   analyticsService = inject(AnalyticsService);
+  seoService = inject(SeoService);
 
 
   email = 'info@carlamaid.qa';
@@ -28,6 +30,19 @@ export class ContactUsComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    // Set SEO
+    this.seoService.setPageSeo({
+      title: 'Request Free Quotation | Contact Carla Maid Qatar | Call +974-71236660 | Doha',
+      description: 'Request a free quotation for professional cleaning services in Qatar. Contact Carla Maid: Call +974-71236660, email info@carlamaid.qa, or visit our office in Doha. Get instant quotes for home, office, and commercial cleaning services.',
+      keywords: 'quotation request Qatar, free cleaning quote Doha, contact Carla Maid Qatar, cleaning service phone number, Doha cleaning company contact, book cleaning service Qatar, cleaning service email, Carla Maid address Doha, request cleaning quote',
+      image: 'https://carlamaid.qa/assets/images/contact-us.png',
+      url: 'https://carlamaid.qa/contact-us',
+      type: 'ContactPage',
+      structuredData: [
+        this.getContactPageSchema()
+      ]
+    });
+
     // Set default quotation request message
     this.formData.message = this._translate.instant('contact.form.defaultMessage');
     
@@ -143,13 +158,42 @@ export class ContactUsComponent implements OnInit {
 
         // Track successful contact form submission
         this.analyticsService.trackServiceInquiry('contact_inquiry');
+        this.analyticsService.trackFormSubmission('quotation_request', 'contact-us-form');
 
         setTimeout(() => {
           this.sent = false;
-        }, 3000);
+        }, 5000); // Increased timeout for better UX
         
       })
      .catch(() => console.log('There was an error submitting the form.'));
+  }
+
+  private getContactPageSchema(): any {
+    return {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "Contact Carla Maid Qatar - Request Quotation",
+      "description": "Contact Carla Maid Qatar for free quotations on professional cleaning services. Call, email, or visit our office in Doha.",
+      "url": "https://carlamaid.qa/contact-us",
+      "mainEntity": {
+        "@type": "Organization",
+        "name": "Carla Maid Cleaning Company",
+        "telephone": "+974-71236660",
+        "email": "info@carlamaid.qa",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Manarat Lusail - Floor 25 - Office 2501",
+          "addressLocality": "Doha",
+          "addressRegion": "Doha",
+          "addressCountry": "QA"
+        },
+        "url": "https://carlamaid.qa",
+        "sameAs": [
+          "https://www.facebook.com/carlamaidqa",
+          "https://www.instagram.com/carlamaidqa"
+        ]
+      }
+    };
   }
 
 }

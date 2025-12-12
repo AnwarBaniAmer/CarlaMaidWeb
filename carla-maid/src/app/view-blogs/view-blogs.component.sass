@@ -138,3 +138,70 @@ b
         transform: rotate(0deg)
     100%
         transform: rotate(360deg)
+
+.blog-cta-section
+    margin-top: 3rem
+    padding-top: 2rem
+    border-top: 2px solid #e0e0e0
+
+.blog-cta-card
+    background: linear-gradient(135deg, rgba(1, 136, 255, 0.05) 0%, rgba(3, 70, 255, 0.05) 100%)
+    border: 1px solid rgba(1, 136, 255, 0.2)
+    border-radius: 12px
+    padding: 2rem
+    text-align: center
+    
+    h3
+        color: #2c3e50
+        font-size: 1.5rem
+        margin-bottom: 0.5rem
+        font-weight: 600
+        
+    p
+        color: #666
+        margin-bottom: 1.5rem
+        font-size: 1rem
+
+.blog-cta-links
+    display: flex
+    flex-wrap: wrap
+    justify-content: center
+    gap: 1rem
+    margin-bottom: 1.5rem
+    
+    @media (max-width: 768px)
+        flex-direction: column
+        align-items: center
+
+.blog-cta-link
+    display: inline-block
+    padding: 0.75rem 1.5rem
+    background: white
+    color: #0188FF
+    text-decoration: none
+    border-radius: 8px
+    border: 2px solid #0188FF
+    font-weight: 500
+    transition: all 0.3s ease
+    
+    &:hover
+        background: #0188FF
+        color: white
+        transform: translateY(-2px)
+        box-shadow: 0 4px 12px rgba(1, 136, 255, 0.3)
+
+.blog-book-btn
+    display: inline-block
+    padding: 1rem 2rem
+    background: linear-gradient(135deg, #0188FF 0%, #0346FF 100%)
+    color: white
+    text-decoration: none
+    border-radius: 8px
+    font-weight: 600
+    font-size: 1.1rem
+    transition: all 0.3s ease
+    box-shadow: 0 4px 12px rgba(1, 136, 255, 0.3)
+    
+    &:hover
+        transform: translateY(-2px)
+        box-shadow: 0 6px 20px rgba(1, 136, 255, 0.4)

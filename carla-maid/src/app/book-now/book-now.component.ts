@@ -12,6 +12,7 @@ import { PaymentService, PaymentRequest, PaymentResponse, PaymentStatus } from '
 import { BookingService, BookingRequest, BookingResponse } from '../shared/services/booking.service';
 import { PaymentDataService } from '../shared/services/payment-data.service';
 import { PaymentSuccessPopupComponent } from '../shared/components/payment-success-popup/payment-success-popup.component';
+import { SeoService } from '../shared/services/seo.service';
 
 // Constants for pricing and configuration
 const PRICING_CONFIG = {
@@ -93,7 +94,8 @@ export class BookNowComponent implements OnInit {
     private analyticsService: AnalyticsService,
     private paymentService: PaymentService,
     private bookingService: BookingService,
-    private paymentDataService: PaymentDataService
+    private paymentDataService: PaymentDataService,
+    private seoService: SeoService
   ) {
     this.initializeForm();
     this.initializeDateRange();
@@ -101,10 +103,19 @@ export class BookNowComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Set SEO
+    this.seoService.setPageSeo({
+      title: 'Book Cleaning Service Online Qatar | Instant Booking | Same-Day Service | Carla Maid',
+      description: 'Book professional cleaning services in Qatar instantly! Home cleaning, office cleaning, maid services. Flexible scheduling, competitive rates, same-day service available. Secure online booking with payment options. Book now!',
+      keywords: 'book cleaning service Qatar, online booking Doha, instant cleaning booking, schedule cleaning service Qatar, book maid service online, cleaning service booking Doha',
+      image: 'https://carlamaid.qa/assets/images/logo.png',
+      url: 'https://carlamaid.qa/book-now',
+      type: 'website'
+    });
+
     this.setupFormSubscriptions();
     this.setupRouterEvents();
     this.checkPaymentSuccessFromUrl();
-
   }
 
   // ==================== INITIALIZATION METHODS ====================

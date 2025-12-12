@@ -28,7 +28,8 @@ interface NavItem {
     TranslateModule,
     MatIconModule,
     CommonModule,
-    RouterLink
+    RouterLink,
+    RouterModule
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.sass'
