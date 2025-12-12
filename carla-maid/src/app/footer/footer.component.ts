@@ -5,6 +5,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 import { PhoneTrackDirective } from '../shared/directives/phone-track.directive';
 import { EmailTrackDirective } from '../shared/directives/email-track.directive';
 @Component({
@@ -16,6 +17,7 @@ import { EmailTrackDirective } from '../shared/directives/email-track.directive'
     MatInputModule,
     MatSelectModule,
     MatIconModule,
+    RouterLink,
     PhoneTrackDirective,
     EmailTrackDirective
   ],

@@ -504,7 +504,7 @@
         <p-carousel [value]="services" [numVisible]="3" [numScroll]="1" [circular]="true" dir="ltr"
             [responsiveOptions]="responsiveOptions" class="services-slider" autoplayInterval="3000">
             <ng-template let-service pTemplate="item">
-                <div class="service-card">
+                <a [routerLink]="['/services', service.slug]" class="service-card">
                     <div>
                         <div>
                             <img [src]="service.image" class="w-full border-round" />
@@ -515,7 +515,7 @@
                         {{ service.title }}
                     </h2>
                     <p>{{ service.description }}</p>
-                </div>
+                </a>
             </ng-template>
         </p-carousel>
         }

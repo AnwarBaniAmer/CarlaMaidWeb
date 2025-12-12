@@ -51,7 +51,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     { label: '', translationKey: 'shared.EventCleaning', slug: 'event-cleaning' },
     { label: '', translationKey: 'shared.EcoFriendlyCleaning', slug: 'eco-friendly-cleaning' },
     { label: '', translationKey: 'shared.HousekeepingServices', slug: 'housekeeping' },
-    { label: '', translationKey: 'shared.CarpetCleaning', slug: 'carpet-cleaning' },
     { label: '', translationKey: 'shared.StaffingForBusinesses', slug: 'staffing-businesses' },
     { label: '', translationKey: 'shared.CustomizedCleaning', slug: 'customized-cleaning' },
     { label: '', translationKey: 'shared.SeasonalCleaningServices', slug: 'seasonal-cleaning' }
@@ -135,9 +134,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
         link: '/blogs-list'
       },
       {
-        label: this.translate.instant('header.bookNow'),
+        label: this.translate.instant('shared.contactUs'),
         icon: 'pi pi-envelope',
-        link: '/book-now'
+        link: '/contact-us'
       }
     ];
     

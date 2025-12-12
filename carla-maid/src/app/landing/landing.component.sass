@@ -161,6 +161,21 @@
             width: 30%
 .service-card
     padding: 0 20px
+    text-decoration: none
+    color: inherit
+    display: block
+    cursor: pointer
+    transition: transform 0.3s ease, opacity 0.3s ease
+    
+    &:hover
+        transform: translateY(-5px)
+        opacity: 0.9
+    
+    &:visited
+        color: inherit
+    
+    h2, p
+        color: inherit
 
 .section-7
     margin-bottom: 10rem
@@ -274,6 +289,38 @@
             flex-direction: column-reverse
             .experience-text-container
                 width: 100%
+
+// Call button styling for desktop - green hover effect
+.call-btn
+    background: #25d366 !important
+    border-color: #25d366 !important
+    
+    &:before
+        background-image: linear-gradient(90deg, #25d366, #128c7e) !important
+    
+    &:hover
+        background: linear-gradient(90deg, #25d366, #128c7e) !important
+        border-color: #25d366 !important
+        
+        &:before
+            background-image: linear-gradient(90deg, #25d366, #128c7e) !important
+        &:after
+            background: linear-gradient(90deg, #25d366, #128c7e) !important
+        
+    span:first-child
+        color: white !important
+        
+    span:last-child
+        background-image: linear-gradient(90deg, #25d366, #128c7e) !important
+        -webkit-background-clip: text !important
+        -webkit-text-fill-color: transparent !important
+    
+    &:hover
+        span:first-child
+            transform: translateY(0) !important
+            color: white !important
+        span:last-child
+            transform: translateY(-24px) !important
 
 @media (max-width: 780px)
     .img-container

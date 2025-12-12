@@ -68,6 +68,10 @@ export const routes: Routes = [
     {
         path: 'thank-you',
         loadComponent: () => import('./thank-you/thank-you.component').then(m => m.ThankYouComponent)
+    },
+    {
+        path: 'policy',
+        loadComponent: () => import('./policy/policy.component').then(m => m.PolicyComponent)
     }
 ];
 export default routes;

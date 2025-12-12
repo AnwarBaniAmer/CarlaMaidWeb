@@ -45,7 +45,7 @@ export class OurServicesComponent implements OnInit {
       : 'Discover 12+ professional cleaning services in Qatar. From office cleaning to maid services, deep cleaning to eco-friendly solutions. Expert cleaners, flexible scheduling, competitive rates. Serving Doha & all Qatar. Book now!';
     const optimizedKeywords = this.translate.currentLang === 'ar'
       ? keywords
-      : 'cleaning services Qatar, office cleaning Doha, home cleaning Qatar, maid services Doha, deep cleaning Qatar, hospitality staff, event cleaning, carpet cleaning Qatar, housekeeping services Doha, eco-friendly cleaning Qatar';
+      : 'cleaning services Qatar, office cleaning Doha, home cleaning Qatar, maid services Doha, deep cleaning Qatar, hospitality staff, event cleaning, housekeeping services Doha, eco-friendly cleaning Qatar';
 
     this.seoService.setPageSeo({
       title: optimizedTitle,
