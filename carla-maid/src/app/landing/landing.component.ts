@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, OnInit, OnDestroy, ViewChild, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CarouselModule } from 'primeng/carousel';
@@ -69,7 +69,7 @@ import { BlogCardComponent } from '../shared/components/blog-card/blog-card.comp
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.sass'
 })
-export class LandingComponent implements OnInit {
+export class LandingComponent implements OnInit, OnDestroy {
 
   private _translate = inject(TranslateService);
   private _configService = inject(ConfigService);
@@ -106,6 +106,29 @@ export class LandingComponent implements OnInit {
   isLoadingBlogs: boolean = false;
 
   isInView = false;
+
+  // Hero image slideshow - Professional cleaning services images only
+  heroImages: string[] = [
+    '../../assets/images/team-carla/hero-image-1.jpeg', // Professional cleaner with equipment hero-image-2.jpg
+    '../../assets/images/team-carla/hero-image-2.jpg',
+    '../../assets/images/team-carla/hero-image-3.jpeg'
+  ];
+  
+  heroImagesAr: string[] = [
+    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80', // Maid cleaning service
+    'https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80', // Professional cleaner with equipment
+    'https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80', // House cleaning professional
+    'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80', // Cleaning team at work
+    'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80', // Professional housekeeping
+    'https://images.unsplash.com/photo-1563453392212-d32632e3c0b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80', // Cleaning service professional
+    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80' // Maid service cleaning
+  ];
+  
+  currentHeroImageIndex: number = 0;
+  currentHeroImage: string = '';
+  nextHeroImage: string = '';
+  isFading: boolean = false;
+  private heroImageInterval: any;
 
   constructor(private router: Router) { }
   ngOnInit(): void {
@@ -217,9 +240,64 @@ export class LandingComponent implements OnInit {
     this._translate.onLangChange.subscribe((event) => {
       this.lang = event.lang;
       this.updateMetaForLanguage(event.lang);
+      // Reset hero images when language changes
+      this.resetHeroSlideshow();
     });
 
     this.getBlogsPosts();
+    
+    // Initialize hero image slideshow
+    this.initializeHeroSlideshow();
+  }
+
+  private initializeHeroSlideshow(): void {
+    // Clear any existing interval
+    if (this.heroImageInterval) {
+      clearInterval(this.heroImageInterval);
+    }
+    
+    // Set initial images
+    const images = this.direction() === 'rtl' ? this.heroImagesAr : this.heroImages;
+    this.currentHeroImageIndex = 0;
+    this.currentHeroImage = images[0];
+    this.nextHeroImage = images[1] || images[0];
+    this.isFading = false;
+    
+    // Start slideshow - change image every 5 seconds for smoother experience
+    this.heroImageInterval = setInterval(() => {
+      this.rotateHeroImage();
+    }, 5000);
+  }
+
+  private resetHeroSlideshow(): void {
+    this.initializeHeroSlideshow();
+  }
+
+  private rotateHeroImage(): void {
+    if (this.isFading) return; // Prevent overlapping transitions
+    
+    const images = this.direction() === 'rtl' ? this.heroImagesAr : this.heroImages;
+    
+    // Update next image index
+    const nextIndex = (this.currentHeroImageIndex + 1) % images.length;
+    this.nextHeroImage = images[nextIndex];
+    
+    // Start fade effect
+    this.isFading = true;
+    
+    // After fade completes, update current image
+    setTimeout(() => {
+      this.currentHeroImageIndex = nextIndex;
+      this.currentHeroImage = images[this.currentHeroImageIndex];
+      this.isFading = false;
+    }, 2000); // Match CSS transition duration for smoother fade
+  }
+
+  ngOnDestroy(): void {
+    // Clean up interval when component is destroyed
+    if (this.heroImageInterval) {
+      clearInterval(this.heroImageInterval);
+    }
   }
 
   private updateMetaForLanguage(lang: string) {

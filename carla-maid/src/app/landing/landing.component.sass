@@ -5,24 +5,66 @@
     flex-direction: column
     
     .img-text
-        background-image: url('../../assets/images/hero-ar.jpg')
-        background-size: cover
-        background-position: center
         margin: 0
         width: 100%
         height: 80vh
         position: relative
         z-index: 0
+        overflow: hidden
         &.ar
-            background-image: url('../../assets/images/hero.jpg')
-            background-position: center
             height: 75vh
+        
+        // Background layers for smooth fade effect
+        .hero-bg-layer
+            position: absolute
+            top: 0
+            left: 0
+            width: 100%
+            height: 100%
+            background-size: cover
+            background-position: center
+            background-repeat: no-repeat
+            opacity: 0
+            transition: opacity 2s cubic-bezier(0.4, 0, 0.2, 1)
+            z-index: 0   // always behind overlays
+            will-change: opacity
+            
+            &.hero-bg-active
+                opacity: 1
+        
+        // Dark overlay to improve text readability over the hero background
+        &::before
+            content: ''
+            position: absolute
+            top: 0
+            left: 0
+            right: 0
+            bottom: 0
+            // Adjust alpha to control darkness over the hero image (lower = more visible image)
+            background: rgba(0, 0, 0, 0.6)
+            z-index: 1   // above images, below wave + content
+            pointer-events: none
+        
+        // Sea-like wave at the bottom for a more professional transition
+        &::after
+            content: ''
+            position: absolute
+            left: 0
+            right: 0
+            bottom: -2px
+            height: 70px
+            background: url('../../assets/images/hero-wave.svg') no-repeat bottom center
+            background-size: cover
+            z-index: 2
+            pointer-events: none
         .img-info
             display: flex
             flex-direction: column
             height: 100%
             justify-content: center
             margin-inline-start: 10rem
+            position: relative
+            z-index: 3
             
             h1
                 color: #FFFFFF
@@ -290,38 +332,6 @@
             .experience-text-container
                 width: 100%
 
-// Call button styling for desktop - green hover effect
-.call-btn
-    background: #25d366 !important
-    border-color: #25d366 !important
-    
-    &:before
-        background-image: linear-gradient(90deg, #25d366, #128c7e) !important
-    
-    &:hover
-        background: linear-gradient(90deg, #25d366, #128c7e) !important
-        border-color: #25d366 !important
-        
-        &:before
-            background-image: linear-gradient(90deg, #25d366, #128c7e) !important
-        &:after
-            background: linear-gradient(90deg, #25d366, #128c7e) !important
-        
-    span:first-child
-        color: white !important
-        
-    span:last-child
-        background-image: linear-gradient(90deg, #25d366, #128c7e) !important
-        -webkit-background-clip: text !important
-        -webkit-text-fill-color: transparent !important
-    
-    &:hover
-        span:first-child
-            transform: translateY(0) !important
-            color: white !important
-        span:last-child
-            transform: translateY(-24px) !important
-
 @media (max-width: 780px)
     .img-container
         .img-text
@@ -340,23 +350,6 @@
             min-width: 250px
             width: 100%
             max-width: 300px
-        
-    .call-btn
-        background: #25d366
-        border-color: #25d366
-        
-        &:before
-            background-image: linear-gradient(90deg, #25d366, #128c7e)
-        
-        &:hover
-            background: linear-gradient(90deg, #25d366, #128c7e)
-            border-color: #25d366
-            
-        span:first-child
-            color: white
-            
-        span:last-child
-            background-image: linear-gradient(90deg, #25d366, #128c7e)
         
     .section-2-container
         flex-direction: column
