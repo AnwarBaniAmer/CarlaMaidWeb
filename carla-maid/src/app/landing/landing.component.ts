@@ -109,19 +109,23 @@ export class LandingComponent implements OnInit, OnDestroy {
 
   // Hero image slideshow - Professional cleaning services images only
   heroImages: string[] = [
-    '../../assets/images/team-carla/hero-image-1.jpeg', // Professional cleaner with equipment hero-image-2.jpg
-    '../../assets/images/team-carla/hero-image-2.jpg',
-    '../../assets/images/team-carla/hero-image-3.jpeg'
+    '../../assets/images/team-carla/hero-image-1.jpeg',
+    '../../assets/images/team-carla/hero-image-4.jpeg',
+    '../../assets/images/team-carla/hero-image-5.jpeg',
+    '../../assets/images/team-carla/hero-image-6.jpeg',
+    '../../assets/images/team-carla/hero-image-7.jpeg',
+    '../../assets/images/team-carla/hero-image-8.jpeg',
+    '../../assets/images/team-carla/hero-image-9.jpeg',
   ];
   
   heroImagesAr: string[] = [
-    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80', // Maid cleaning service
-    'https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80', // Professional cleaner with equipment
-    'https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80', // House cleaning professional
-    'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80', // Cleaning team at work
-    'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80', // Professional housekeeping
-    'https://images.unsplash.com/photo-1563453392212-d32632e3c0b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80', // Cleaning service professional
-    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80' // Maid service cleaning
+    '../../assets/images/team-carla/hero-image-1.jpeg',
+    '../../assets/images/team-carla/hero-image-4.jpeg',
+    '../../assets/images/team-carla/hero-image-5.jpeg',
+    '../../assets/images/team-carla/hero-image-6.jpeg',
+    '../../assets/images/team-carla/hero-image-7.jpeg',
+    '../../assets/images/team-carla/hero-image-8.jpeg',
+    '../../assets/images/team-carla/hero-image-9.jpeg',
   ];
   
   currentHeroImageIndex: number = 0;
